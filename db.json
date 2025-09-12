@@ -1,0 +1,124 @@
+{
+  "tasks": [
+    {
+      "id": "a8a35d13-809d-4dce-a659-19e7574ec56d",
+      "title": "Read Spanish",
+      "time": "evening",
+      "description": "Read",
+      "status": "not_started"
+    },
+    {
+      "id": "2301f124-898b-43c8-9068-802a496f59f3",
+      "title": "Study Node JS",
+      "time": "evening",
+      "description": "To study node js",
+      "status": "in_progress"
+    },
+    {
+      "id": "e851434f-2d1d-4094-988e-4e101582f1f1",
+      "title": "Study Typescript",
+      "time": "morning",
+      "description": "Studying Typescript",
+      "status": "in_progress"
+    },
+    {
+      "id": "b5c357e3-96b0-4e82-be82-601c06680517",
+      "title": "Study React",
+      "time": "evening",
+      "description": "Description",
+      "status": "done"
+    }
+  ],
+  "maintenance": [
+    {
+      "id": "1",
+      "area": "Pit",
+      "title": "Volvo EC380",
+      "plant": "mobile"
+    },
+    {
+      "id": "2",
+      "area": "Pit",
+      "title": "Volvo EC210",
+      "plant": "fixed"
+    },
+    {
+    "id": "3",
+    "area": "Pit",
+    "title": "A40",
+    "plant": "mobile"
+    },
+    {
+    "id": "4",
+    "area": "Concrete",
+    "title": "A25 C",
+    "plant": "mobile"
+    },
+    {
+    "id": "5",
+    "area": "Pit",
+    "title": "A25 G",
+    "plant": "fixed"
+    },
+    {
+    "id": "6",
+    "area": "Yard",
+    "title": "L150 E (2005)",
+    "plant": "mobile"
+    },    
+    {
+    "id": "7",
+    "area": "Blocks",
+    "title": "L150 H (2014)",
+    "plant": "mobile"
+    },
+    {
+      "id": "8",
+      "area": "Blocks",
+    "title": "Cone (Pegson)",
+    "plant": "fixed"
+    },
+    {
+    "id": "9",
+    "area": "Blocks",
+    "title": "Jaw",
+    "plant": "fixed"
+    },
+        {
+          "id": "10",
+      "area": "Precast",
+    "title": "Barmac",
+    "plant": "mobile"
+    },
+        {
+          "id": "11",
+      "area": "Concrete",
+    "title": "Finlay Triple deck Screen",
+    "plant": "fixed"
+    },
+        {
+          "id": "12",
+      "area": "Concrete",
+    "title": "Double Deck",
+    "plant": "fixed"
+    },
+        {
+          "id": "13",
+      "area": "Concrete",
+    "title": "CAT Genny",
+    "plant": "fixed"
+    },
+        {
+          "id": "14",
+      "area": "Precast",
+    "title": "Cummins Genny",
+    "plant": "fixed"
+    },
+    {
+    "id": "15",
+    "area": "Yard",
+    "title": "Genny",
+    "plant": "fixed"
+    }
+  ]
+}

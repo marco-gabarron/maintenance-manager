@@ -1,0 +1,46 @@
+import PropTypes from 'prop-types'
+import { forwardRef } from 'react'
+
+import InputErrorMessage from './InputErrorMessage'
+import InputLabel from './InputLabel'
+
+//
+// const Input = ({ label, errorMessage, ...rest }) => {
+//   return (
+//     <div className="flex flex-col space-y-1 text-left">
+//       <InputLabel htmlFor={rest.id}>{label}</InputLabel>
+
+//       <input
+//         className="rounded-lg border border-solid border-[#ECECEC] px-4 py-3 outline-brand-primary placeholder:text-sm placeholder:text-brand-text-gray"
+//         {...rest}
+//       />
+//       {errorMessage && (
+//         <p className="text-left text-xs text-red-500">{errorMessage}</p>
+//       )}
+//     </div>
+//   )
+// }
+
+//Required when Ref required to be passed to a child component inside a component, in this case Input component to input html
+const Input = forwardRef(({ label, errorMessage, ...rest }, ref) => {
+  return (
+    <div className="flex flex-col space-y-1 text-left">
+      <InputLabel htmlFor={rest.id}>{label}</InputLabel>
+
+      <input
+        className="rounded-lg border border-solid border-[#ECECEC] px-4 py-3 outline-brand-primary placeholder:text-sm placeholder:text-brand-text-gray"
+        ref={ref}
+        {...rest}
+      />
+      {errorMessage && <InputErrorMessage>{errorMessage}</InputErrorMessage>}
+    </div>
+  )
+})
+
+Input.displayName = 'Input'
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+}
+
+export default Input
