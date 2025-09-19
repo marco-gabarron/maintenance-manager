@@ -17,7 +17,7 @@ import ServiceHistorySeparator from '../components/ServiceHistorySeparator'
 
 import { useGetMachine } from '../hooks/data/use-get-machine'
 import { useDeleteHistory } from '../hooks/data/use-delete-history'
-import { useUpdateHistory } from '../hooks/data/use-update-history'
+import { useUpdateMachine } from '../hooks/data/use-update-machine'
 import { useGetHistories } from '../hooks/data/use-get-histories'
 
 import AddHistoryDialog from '../components/AddHistoryDialog'
@@ -32,10 +32,10 @@ const MachineDetailsPage = () => {
     handleSubmit,
     reset,
   } = useForm()
-  const { mutate: updateHistory, isPending: updateHistoryIsLoading } =
-    useUpdateHistory(machineId)
-  const { mutate: deleteHistory, isPending: deleteHistoryIsLoading } =
-    useDeleteHistory(machineId)
+  const { mutate: updateMachine, isPending: updateHistoryIsLoading } =
+    useUpdateMachine(machineId)
+  // const { mutate: deleteHistory, isPending: deleteHistoryIsLoading } =
+  //   useDeleteHistory(machineId)
   const { data: machine } = useGetMachine(machineId, reset)
   const {data: histories } = useGetHistories(machineId)
 
@@ -47,21 +47,22 @@ const MachineDetailsPage = () => {
   }
 
   const handleSaveClick = async (data) => {
-    updateHistory(data, {
+    updateMachine(data, {
       onSuccess: () => toast.success('Task updated successfully'),
       onError: () => toast.error('Something went wrong when updating.'),
     })
+    console.log(errors)
   }
 
-  const handleDeleteClick = async () => {
-    deleteTask(undefined, {
-      onSuccess: () => {
-        toast.success('Task deleted successfully')
-        navigate(-1)
-      },
-      onError: () => toast.error('Error when trying to delete task!'),
-    })
-  }
+  // const handleDeleteClick = async () => {
+  //   deleteTask(undefined, {
+  //     onSuccess: () => {
+  //       toast.success('Task deleted successfully')
+  //       navigate(-1)
+  //     },
+  //     onError: () => toast.error('Error when trying to delete task!'),
+  //   })
+  // }
 
   return (
     <div className="flex">

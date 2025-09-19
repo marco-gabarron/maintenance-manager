@@ -18,7 +18,7 @@
       "id": "e851434f-2d1d-4094-988e-4e101582f1f1",
       "title": "Study Typescript",
       "time": "morning",
-      "description": "Studying Typescript",
+      "description": "Studying Typescript?",
       "status": "in_progress"
     },
     {
@@ -43,139 +43,160 @@
       "plant": "fixed"
     },
     {
-    "id": "3",
-    "area": "Pit",
-    "title": "A40",
-    "plant": "mobile"
+      "id": "3",
+      "area": "Pit",
+      "title": "A40",
+      "plant": "mobile"
     },
     {
-    "id": "4",
-    "area": "Concrete",
-    "title": "A25 C",
-    "plant": "mobile"
+      "id": "4",
+      "area": "Concrete",
+      "title": "A25 C",
+      "plant": "mobile"
     },
     {
-    "id": "5",
-    "area": "Pit",
-    "title": "A25 G",
-    "plant": "fixed"
+      "id": "5",
+      "area": "Pit",
+      "title": "A25 G",
+      "plant": "fixed"
     },
     {
-    "id": "6",
-    "area": "Yard",
-    "title": "L150 E (2005)",
-    "plant": "mobile"
-    },    
+      "id": "6",
+      "area": "Yard",
+      "title": "L150 E (2005)",
+      "plant": "mobile"
+    },
     {
-    "id": "7",
-    "area": "Blocks",
-    "title": "L150 H (2014)",
-    "plant": "mobile"
+      "id": "7",
+      "area": "Blocks",
+      "title": "L150 H (2014)",
+      "plant": "mobile"
     },
     {
       "id": "8",
       "area": "Blocks",
-    "title": "Cone (Pegson)",
-    "plant": "fixed"
+      "title": "Cone (Pegson)",
+      "plant": "fixed"
     },
     {
-    "id": "9",
-    "area": "Blocks",
-    "title": "Jaw",
-    "plant": "fixed"
-    },
-        {
-          "id": "10",
-      "area": "Precast",
-    "title": "Barmac",
-    "plant": "mobile"
-    },
-        {
-          "id": "11",
-      "area": "Concrete",
-    "title": "Finlay Triple deck Screen",
-    "plant": "fixed"
-    },
-        {
-          "id": "12",
-      "area": "Concrete",
-    "title": "Double Deck",
-    "plant": "fixed"
-    },
-        {
-          "id": "13",
-      "area": "Concrete",
-    "title": "CAT Genny",
-    "plant": "fixed"
-    },
-        {
-          "id": "14",
-      "area": "Precast",
-    "title": "Cummins Genny",
-    "plant": "fixed"
+      "id": "9",
+      "area": "Blocks",
+      "title": "Jaw",
+      "plant": "fixed"
     },
     {
-    "id": "15",
-    "area": "Yard",
-    "title": "Genny",
-    "plant": "fixed"
+      "id": "10",
+      "area": "Precast",
+      "title": "Barmac",
+      "plant": "mobile",
+      "manufacturer": "Volvo",
+      "year": "2012",
+      "serial": "118245fd5d8dd1555",
+      "serviceFrequency": "1month",
+      "hours": "13619",
+      "mileage": "108150",
+      "status": "active"
+    },
+    {
+      "id": "11",
+      "area": "Concrete",
+      "title": "Finlay Triple deck Screen",
+      "plant": "fixed"
+    },
+    {
+      "id": "12",
+      "area": "Concrete",
+      "title": "Double Deck",
+      "plant": "fixed"
+    },
+    {
+      "id": "13",
+      "area": "Concrete",
+      "title": "CAT Genny",
+      "plant": "fixed",
+      "manufacturer": "Volvo",
+      "year": "2018",
+      "serial": "118hds5fd5d8dd15",
+      "serviceFrequency": "1month",
+      "hours": "13619",
+      "mileage": "108500",
+      "status": "active"
+    },
+    {
+      "id": "14",
+      "area": "Precast",
+      "title": "Cummins Genny",
+      "plant": "fixed",
+      "manufacturer": "Volvo",
+      "year": "2015",
+      "serial": "84985161sdfs8d4s8",
+      "serviceFrequency": "1month",
+      "hours": "551d",
+      "mileage": "854515",
+      "status": "active"
+    },
+    {
+      "id": "15",
+      "area": "Yard",
+      "title": "Genny",
+      "plant": "fixed"
     }
   ],
   "history": [
     {
-    "id": "20", 
-    "machineId": "10",
-    "date": "11/06/2025",
-    "service": "minor",
-    "description": "Water pump had to be replaced as water was leaking and could cause damage to bottle.",
-    "type": "pm",
-    "hours": 12001,
-    "mileage": 68480,
-    "completedBy": "DK"
+      "id": "20",
+      "machineId": "10",
+      "date": "11/06/2025",
+      "service": "minor",
+      "description": "Water pump had to be replaced as water was leaking and could cause damage to bottle.",
+      "type": "pm",
+      "hoursService": "12001",
+      "mileageService": "68480",
+      "completedBy": "DK"
     },
     {
-    "id": "21", 
-    "machineId": "10",
-    "date": "19/09/2025",
-    "service": "major",
-    "description": "Service completed as per manufacturer guidelines preceding CVRT.",
-    "type": "breakdown",
-    "hours": 12995,
-    "mileage": 88508,
-    "completedBy": "JOB"
+      "id": "21",
+      "machineId": "10",
+      "date": "19/09/2025",
+      "service": "major",
+      "description": "Service completed as per manufacturer guidelines preceding CVRT.",
+      "type": "breakdown",
+      "hoursService": "12995",
+      "mileageService": "88508",
+      "completedBy": "JOB"
     },
     {
-    "id": "22", 
-    "machineId": "10",
-    "date": "14/12/2025",
-    "service": "minor",
-    "description": "Service completed as per manufacturer guidelines. Bottle Motor and gear replaced",
-    "type": "pm",
-    "hours": 13619,
-    "mileage": 108500,
-    "completedBy": "MG"
+      "id": "22",
+      "machineId": "10",
+      "date": "14/12/2025",
+      "service": "minor",
+      "description": "Service completed as per manufacturer guidelines. Bottle Motor and gear replaced",
+      "type": "pm",
+      "hoursService": "13619",
+      "mileageService": "108500",
+      "completedBy": "MG"
     },
     {
-    "id": "23", 
-    "machineId": "14",
-    "date": "11/06/2025",
-    "service": "minor",
-    "description": "Water pump had to be replaced as water was leaking and could cause damage to bottle.",
-    "type": "pm",
-    "hours": 12001,
-    "mileage": 68480,
-    "completedBy": "DK"
+      "id": "23",
+      "machineId": "14",
+      "date": "11/06/2025",
+      "service": "minor",
+      "description": "Water pump had to be replaced as water was leaking and could cause damage to bottle.",
+      "type": "pm",
+      "hoursService": "12001",
+      "mileageService": "68480",
+      "completedBy": "DK"
     },
     {
-    "id": "24", 
-    "machineId": "14",
-    "date": "19/09/2025",
-    "service": "major",
-    "description": "Service completed as per manufacturer guidelines preceding CVRT.",
-    "type": "breakdown",
-    "hours": 12995,
-    "mileage": 88508,
-    "completedBy": "JOB"
+      "id": "24",
+      "machineId": "14",
+      "date": "19/09/2025",
+      "service": "major",
+      "description": "Service completed as per manufacturer guidelines preceding CVRT.",
+      "type": "breakdown",
+      "hoursService": "12995",
+      "mileageService": "88508",
+      "completedBy": "JOB"
     }
   ]
 }

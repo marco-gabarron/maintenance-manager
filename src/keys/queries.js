@@ -10,5 +10,6 @@ export const pitQueryKeys = {
 export const machineQueryKeys = {
   getHistories: (machineId) => ['histories', machineId],
   getHistory: (historyId) => ['history', historyId],
+  getAll: () => ['machines'],
   getOne: (machineId) => ['machine', machineId],
 }

@@ -4,12 +4,12 @@ import { machineMutationKeys } from '../../keys/mutations'
 import { machineQueryKeys } from '../../keys/queries'
 import { api } from '../../lib/axios'
 
-export const useUpdateHistory = (machineId) => {
+export const useUpdateMachine = (machineId) => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationKey: machineMutationKeys.update(machineId),
     mutationFn: async (data) => {
-      const { data: updatedHistory } = await api.patch(`/maintenance/${machineId}`, {
+      const { data: updatedMachine } = await api.patch(`/maintenance/${machineId}`, {
         title: data?.title?.trim(),
         area: data?.area,
         manufacturer: data?.manufacturer?.trim(),
@@ -23,12 +23,12 @@ export const useUpdateHistory = (machineId) => {
       queryClient.setQueryData(machineQueryKeys.getAll(), (oldMachines) => {
         return oldMachines.map((oldMachine) => {
           if (oldMachine.id === machineId) {
-            return updatedHistory
+            return updatedMachine
           }
           return oldMachine
         })
       })
-      queryClient.setQueryData(machineQueryKeys.getOne(machineId), updatedHistory)
+      queryClient.setQueryData(machineQueryKeys.getOne(machineId), updatedMachine)
     },
   })
 }

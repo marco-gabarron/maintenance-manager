@@ -1,19 +1,6 @@
-import { LoaderIcon, Tasks2Icon, TasksIcon } from '../assets/icons'
 import MaintenanceAreaCard from '../components/MaintenanceAreaCard'
-import { useGetTasks } from '../hooks/data/use-get-tasks'
 
 const MaintenanceAreaCards = () => {
-  const { data: tasks } = useGetTasks()
-
-  const notStartedTasks = tasks?.filter(
-    (tasks) => tasks.status === 'not_started'
-  ).length
-  const inProgressTasks = tasks?.filter(
-    (tasks) => tasks.status === 'in_progress'
-  ).length
-  const completedTasks = tasks?.filter(
-    (tasks) => tasks.status === 'done'
-  ).length
 
   return (
     <div className="grid grid-cols-5 gap-6">
@@ -36,6 +23,10 @@ const MaintenanceAreaCards = () => {
        <MaintenanceAreaCard
         mainText='Yard'
         secondaryText="Forklift, Compressor"
+      />
+       <MaintenanceAreaCard
+        mainText='Archived'
+        secondaryText="Status: Not Active"
       />
     </div>
       )

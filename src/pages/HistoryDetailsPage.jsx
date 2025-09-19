@@ -2,14 +2,13 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
-import { useState } from 'react'
-
 import { ArrowLeftIcon, ChevronRightIcon, AddIcon } from '../assets/icons'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import Sidebar from '../components/Sidebar'
 
 import { useDeleteHistory } from '../hooks/data/use-delete-history'
+import { useUpdateMachine } from '../hooks/data/use-update-machine'
 import { useUpdateHistory } from '../hooks/data/use-update-history'
 import { useGetHistory } from '../hooks/data/use-get-history'
 import { useGetMachine } from '../hooks/data/use-get-machine'
@@ -145,13 +144,13 @@ const HistoryDetailsPage = ({}) => {
                          />
          
                          <Input
-                           id="hours"
+                           id="hoursService"
                            label="Hours"
                            placeholder="Current Hours"
                            errorMessage={errors?.hours?.message}
                            // ref={descriptionRef}
                            disabled={isLoading}
-                           {...register('hours', {
+                           {...register('hoursService', {
                              required: 'Amount of Hours is required',
                              validate: (value) => {
                                if (!value.trim()) {
@@ -163,13 +162,13 @@ const HistoryDetailsPage = ({}) => {
                          />
          
                          <Input
-                           id="mileage"
+                           id="mileageService"
                            label="Mileage"
                            placeholder="Current Mileage"
                            errorMessage={errors?.mileage?.message}
                            // ref={descriptionRef}
                            disabled={isLoading}
-                           {...register('mileage', {
+                           {...register('mileageService', {
                              required: 'Mileage is required',
                              validate: (value) => {
                                if (!value.trim()) {

@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 
 import { CheckIcon, DetailsIcon, LoaderIcon, TrashIcon } from '../assets/icons'
 import Button from './Button'
-import { useUpdateHistory } from '../hooks/data/use-update-history'
+import { useUpdateMachine } from '../hooks/data/use-update-machine'
 import { useDeleteHistory } from '../hooks/data/use-delete-history'
 
 const ServiceHistoryItem = ({ history }) => {
@@ -78,7 +78,8 @@ const ServiceHistoryItem = ({ history }) => {
         <div
           className={`flex items-center justify-center p-2`}
         >
-          {history.service}
+          {history.service === 'minor' && 'Minor'}
+          {history.service === 'major' && 'Major'}
         </div>
 
         <div
@@ -90,13 +91,13 @@ const ServiceHistoryItem = ({ history }) => {
         <div
           className={`flex items-center justify-center p-2`}
         >
-           {history.hours}
+           {history.hoursService}
         </div>
 
         <div
           className={`flex items-center justify-center p-2`}
         >
-           {history.mileage}
+           {history.mileageService}
         </div> 
 
         <div
