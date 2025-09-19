@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
+import { useState } from 'react'
+
 import { ArrowLeftIcon, ChevronRightIcon, AddIcon } from '../assets/icons'
 import Button from '../components/Button'
 import Input from '../components/Input'
@@ -11,10 +13,14 @@ import AreaSelect from '../components/AreaSelect'
 import ServiceFrequencySelect from '../components/ServiceFrequencySelect'
 import StatusSelect from '../components/StatusSelect'
 import ServiceHistoryItem from '../components/ServiceHistoryItem'
+import ServiceHistorySeparator from '../components/ServiceHistorySeparator'
 
 import { useGetMachine } from '../hooks/data/use-get-machine'
 import { useDeleteHistory } from '../hooks/data/use-delete-history'
 import { useUpdateHistory } from '../hooks/data/use-update-history'
+import { useGetHistories } from '../hooks/data/use-get-histories'
+
+import AddHistoryDialog from '../components/AddHistoryDialog'
 
 const MachineDetailsPage = () => {
   const { machineId } = useParams()
@@ -31,8 +37,10 @@ const MachineDetailsPage = () => {
   const { mutate: deleteHistory, isPending: deleteHistoryIsLoading } =
     useDeleteHistory(machineId)
   const { data: machine } = useGetMachine(machineId, reset)
+  const {data: histories } = useGetHistories(machineId)
 
   //const { mutate: updateTask, isPending: updateTaskIsLoading } = useUpdateTask(machineId)
+ const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false)
 
   const handleBackClick = () => {
     navigate(-1)
@@ -76,11 +84,19 @@ const MachineDetailsPage = () => {
           <Button
             className="h-fit self-end"
             color="primary"
-            onClick={handleDeleteClick}
+            onClick={() => setAddTaskDialogIsOpen(true)}
           >
             <AddIcon />
             Add Service Entry
           </Button>
+
+                  <AddHistoryDialog
+                    isOpen={addTaskDialogIsOpen}
+                    // If its something more complicated its worth to use like this and create a function up there
+                    handleClose={() => setAddTaskDialogIsOpen(false)}
+                    machineId={machine?.id}
+                    machineTitle={machine?.title}
+                  />
         </div>
 
                     {/* Left Side */}
@@ -234,19 +250,20 @@ const MachineDetailsPage = () => {
     <div className="grid grid-cols-1 gap-6 border-black border border-solid rounded-[10px]">
           <div className="space-y-6 rounded-[10px] bg-white p-6">
             <div>
-              <h3 className="text-xl font-semibold">History</h3>
+              <h3 className="text-xl font-semibold">Service History</h3>
               <span className="text-sm text-brand-dark-gray">
-                History
+                {machine?.title}
               </span>
             </div>
             <div className="space-y-2">
-              {/* {machine?.map((history) => (
-                <TaskItem key={history.id} task={task} />
-              ))} */}
+              <ServiceHistorySeparator />
+              {histories?.map((history) => (
+                <ServiceHistoryItem key={history.id} history={history} />
+              ))}
+              {/* <ServiceHistoryItem key={history?.id} machine={m1} />
+              <ServiceHistoryItem key={history?.id} machine={m2} />
+              <ServiceHistoryItem key={history?.id} machine={m3} /> */}
 
-              {console.log(machineId)}
-              {console.log(machine)}
-              <ServiceHistoryItem key={machineId} task={machine} />
             </div>
           </div>
       </div>

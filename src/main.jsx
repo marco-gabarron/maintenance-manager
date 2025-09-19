@@ -12,6 +12,7 @@ import TasksPage from './pages/Tasks.jsx'
 import Maintenance from './pages/Maintenance.jsx'
 import Maintenance2Page from './pages/Maintenance2Page.jsx'
 import MachineDetailsPage from './pages/MachineDetailsPage.jsx'
+import HistoryDetailsPage from './pages/HistoryDetailsPage.jsx'
 
 const queryClient = new QueryClient()
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: '/machine/:machineId',
     element: <MachineDetailsPage />,
+  },
+  {
+    path: '/history/:historyId',
+    element: <HistoryDetailsPage />,
   },
 ])
 

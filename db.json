@@ -120,5 +120,62 @@
     "title": "Genny",
     "plant": "fixed"
     }
+  ],
+  "history": [
+    {
+    "id": "20", 
+    "machineId": "10",
+    "date": "11/06/2025",
+    "service": "minor",
+    "description": "Water pump had to be replaced as water was leaking and could cause damage to bottle.",
+    "type": "pm",
+    "hours": 12001,
+    "mileage": 68480,
+    "completedBy": "DK"
+    },
+    {
+    "id": "21", 
+    "machineId": "10",
+    "date": "19/09/2025",
+    "service": "major",
+    "description": "Service completed as per manufacturer guidelines preceding CVRT.",
+    "type": "breakdown",
+    "hours": 12995,
+    "mileage": 88508,
+    "completedBy": "JOB"
+    },
+    {
+    "id": "22", 
+    "machineId": "10",
+    "date": "14/12/2025",
+    "service": "minor",
+    "description": "Service completed as per manufacturer guidelines. Bottle Motor and gear replaced",
+    "type": "pm",
+    "hours": 13619,
+    "mileage": 108500,
+    "completedBy": "MG"
+    },
+    {
+    "id": "23", 
+    "machineId": "14",
+    "date": "11/06/2025",
+    "service": "minor",
+    "description": "Water pump had to be replaced as water was leaking and could cause damage to bottle.",
+    "type": "pm",
+    "hours": 12001,
+    "mileage": 68480,
+    "completedBy": "DK"
+    },
+    {
+    "id": "24", 
+    "machineId": "14",
+    "date": "19/09/2025",
+    "service": "major",
+    "description": "Service completed as per manufacturer guidelines preceding CVRT.",
+    "type": "breakdown",
+    "hours": 12995,
+    "mileage": 88508,
+    "completedBy": "JOB"
+    }
   ]
 }

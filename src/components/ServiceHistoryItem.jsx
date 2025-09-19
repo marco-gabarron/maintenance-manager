@@ -7,10 +7,9 @@ import Button from './Button'
 import { useUpdateHistory } from '../hooks/data/use-update-history'
 import { useDeleteHistory } from '../hooks/data/use-delete-history'
 
-const ServiceHistoryItem = ({ service }) => {
-  //const { mutate, isPending } = useDeleteHistory(service.id)
-
-  //const { mutate: updateTask } = useUpdateHistory(service.id)
+const ServiceHistoryItem = ({ history }) => {
+  // const { mutate, isPending } = useDeleteHistory(machine.id)
+  // const { mutate: updateHistory } = useUpdateHistory(machine.id)
 
   const handleDeleteClick = async () => {
     mutate(undefined, {
@@ -59,46 +58,52 @@ const ServiceHistoryItem = ({ service }) => {
 
   return (
     <div
-      className={`flex items-center gap-3 rounded-lg bg-opacity-10 px-4 py-3 text-sm transition bg-brand-dark-blue bg-opacity-5 text-brand-dark-blue`}
+      className={`flex items-center gap-3 rounded-lg bg-opacity-10 px-4 py-3 text-sm transition bg-brand-dark-blue bg-opacity-5 text-brand-dark-blue hover:bg-gray-50`}
     >
-      <div className="flex items-center justify-center divide-x-2 w-full justify-between">
+      <div className="grid grid-cols-9 items-center justify-center divide-x-2 w-full">
         <div
-          className={`flex h-7 items-center justify-center p-2`}
+          className={`flex items-center justify-center p-2`}
         >
-          11/09/2025
-        </div>
-        <div
-          className={`flex h-7 items-center justify-center p-2`}
-        >
-          Major / Minor
-        </div>
-        <div
-          className={`flex h-7 items-center justify-center p-2`}
-        >
-          Service Details
-        </div>
-        <div
-          className={`flex h-7 items-center justify-center p-2`}
-        >
-          {service?.title}
-        </div>
-        <div
-          className={`flex h-7 items-center justify-center p-2`}
-        >
-           Hours
+          {history.date}
         </div>
 
         <div
-          className={`flex h-7 items-center justify-center p-2`}
+          className={`flex items-center justify-center p-2`}
         >
-           Mileage
+          {history.type === 'breakdown' && 'Breakdown'}
+          {history.type === 'pm' && 'Preventive Maintenance'}
+          {history.type === 'service' && 'Service'}
         </div>
 
         <div
-          className={`flex h-7 items-center justify-center p-2`}
+          className={`flex items-center justify-center p-2`}
+        >
+          {history.service}
+        </div>
+
+        <div
+          className={`flex items-center justify-center p-2 col-span-3`}
+        >
+          {history.description}
+        </div>
+
+        <div
+          className={`flex items-center justify-center p-2`}
+        >
+           {history.hours}
+        </div>
+
+        <div
+          className={`flex items-center justify-center p-2`}
+        >
+           {history.mileage}
+        </div> 
+
+        <div
+          className={`flex items-center justify-center p-2`}
         >
            
-        Completed By
+        {history.completedBy}
         </div>
       
         
@@ -108,24 +113,24 @@ const ServiceHistoryItem = ({ service }) => {
             <TrashIcon className="text-brand-text-gray" />
         </Button> */}
 
-        <Link to={`/maintenance/10`}>
+        <Link to={`/history/${history?.id}`}>
           <DetailsIcon />
         </Link>
     </div>
   )
 }
 
-// ServiceHistoryItem.propTypes = {
-//   service: PropTypes.shape({
-//     id: PropTypes.string.isRequired,
-//     date: PropTypes.string.isRequired,
-//     category: PropTypes.string.isRequired,
-//     description: PropTypes.string,
-//     type: PropTypes.oneOf(['breakdown', 'service', 'pm']).isRequired,
-//     hours: PropTypes.string,
-//     mileage: PropTypes.string,
-//     completedBy: PropTypes.string,
-//   }).isRequired,
-// }
+ServiceHistoryItem.propTypes = {
+  history: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    // category: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    type: PropTypes.oneOf(['breakdown', 'service', 'pm']).isRequired,
+    hours: PropTypes.string,
+    mileage: PropTypes.string,
+    completedBy: PropTypes.string,
+  }).isRequired,
+}
 
 export default ServiceHistoryItem
