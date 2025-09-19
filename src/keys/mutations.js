@@ -6,6 +6,6 @@ export const taskMutationKeys = {
 
 export const machineMutationKeys = {
   add: () => ['add-machine'],
-  update: (taskId) => ['update-machine', taskId],
-  delete: (taskId) => ['delete-machine', taskId],
+  update: (machineId) => ['update-machine', machineId],
+  delete: (machineId) => ['delete-machine', machineId],
 }

@@ -49,9 +49,8 @@ const MachineDetailsPage = () => {
   const handleSaveClick = async (data) => {
     updateMachine(data, {
       onSuccess: () => toast.success('Task updated successfully'),
-      onError: () => toast.error('Something went wrong when updating.'),
+      onError: () => toast.error('Something went wrong when updating, Please try again!.'),
     })
-    console.log(errors)
   }
 
   // const handleDeleteClick = async () => {
