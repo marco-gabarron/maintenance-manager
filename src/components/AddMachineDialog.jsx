@@ -9,15 +9,15 @@ import { toast } from 'sonner'
 import { v4 } from 'uuid'
 
 import { LoaderIcon } from '../assets/icons'
-import { useAddHistory } from '../hooks/data/use-add-history'
+import { useAddMachine } from '../hooks/data/use-add-machine'
 import Button from './Button'
 import Input from './Input'
-import DescriptionTextArea from './DescriptionTextArea'
-import TypeSelect from './TypeSelect'
-import ServiceSelect from './ServiceSelect'
+import ServiceFrequencySelect from './ServiceFrequencySelect'
+import PlantSelect from './PlantSelect'
+import StatusSelect from './StatusSelect'
 
-const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
-  const { mutate } = useAddHistory()
+const AddMachineDialog = ({ isOpen, handleClose, area }) => {
+  const { mutate } = useAddMachine()
   const {
     register,
     formState: { errors, isSubmitting: isLoading },
@@ -25,59 +25,68 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
     reset,
   } = useForm({
     defaultValues: {
-    date: '',
-    service: 'minor',
-    description: '',
-    serviceType: 'pm',
-    hoursService: '',
-    mileageService: '',
-    completedBy: ''
+    title: '',
+    plant: 'mobile',
+    manufacturer: '',
+    year: '',
+    serial: '',
+    serviceFrequency: '1month',
+    hours: '',
+    mileage: '',
+    status: 'active'
     },
   })
 
   const nodeRef = useRef()
 
   const handleSaveClick = async (data) => {
-    const history = {
-      id: v4(),
-      machineId: machineId,
-      date: data?.date?.trim(),
-      service: data?.service,
-      description: data?.description?.trim(),
-      serviceType: data?.serviceType,
-      hoursService: data?.hoursService?.trim(),
-      mileageService: data?.mileageService?.trim(),
-      completedBy: data?.completedBy?.trim(),
+    const machine = {
+        id: v4(),
+        area: area,
+        title: data?.title?.trim(),
+        plant: data?.plant,
+        manufacturer: data?.manufacturer?.trim(),
+        year: data?.year?.trim(),
+        serial: data?.serial?.trim(),
+        serviceFrequency: data?.serviceFrequency,
+        hours: data?.hours?.trim(),
+        mileage: data?.mileage?.trim(),
+        status: data?.status,
     }
 
-    mutate(history, {
+    mutate(machine, {
       onSuccess: () => {
         handleClose()
         reset({
-            date: '',
-            service: 'minor',
-            description: '',
-            serviceType: 'pm',
-            hoursService: '',
-            mileageService: '',
-            completedBy: '',
+            title: '',
+            plant: 'mobile',
+            manufacturer: '',
+            year: '',
+            serial: '',
+            serviceFrequency: '1month',
+            hours: '',
+            mileage: '',
+            status: 'active'
         })
       },
-      onError: () => {
+      onError: (error) => {
         toast.error('Something went wrong while adding task. Please try again!')
+        console.log('Error adding machine:', error)
       }
     })
   }
 
   const handleCancelClick = () => {
     reset({
-        date: '',
-        service: 'minor',
-        description: '',
-        serviceType: 'pm',
-        hoursService: '',
-        mileageService: '',
-        completedBy: '',
+        title: '',
+        plant: 'mobile',
+        manufacturer: '',
+        year: '',
+        serial: '',
+        serviceFrequency: '1month',
+        hours: '',
+        mileage: '',
+        status: 'active'
     })
     handleClose()
   }
@@ -99,7 +108,7 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
           >
             <div className="rounded-xl bg-white p-5 text-center shadow">
               <h2 className="text-xl font-semibold text-brand-dark-blue">
-                Add New Service history for {machineTitle}
+                Add New Machine for {area}
               </h2>
               <p className="my-1 text-sm text-brand-text-gray">
                 Insert info below
@@ -109,19 +118,19 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                 className="flex w-[336px] flex-col space-y-4"
               >
                 <Input
-                  id="date"
-                  label="Service Date"
-                  placeholder="Enter Service Date"
+                  id="title"
+                  label="Name"
+                  placeholder="Name"
                   // value={title}
                   // onChange={(event) => {
                   //   setTitle(event.target.value)
                   // }}
-                  errorMessage={errors?.date?.message}
-                  {...register('date', {
-                    required: 'Date is required',
+                  errorMessage={errors?.title?.message}
+                  {...register('title', {
+                    required: 'Name is required',
                     validate: (value) => {
                       if (!value.trim()) {
-                        return 'Date cannot be empty'
+                        return 'Name cannot be empty'
                       }
                       return true
                     },
@@ -129,43 +138,79 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                   disabled={isLoading}
                 />
 
-                <ServiceSelect
+                <PlantSelect
                   disabled={isLoading}
-                  {...register('service', { required: true })}
-                />
-
-                <DescriptionTextArea
-                  id="description"
-                  label="Service Details"
-                  placeholder="Service Details"
-                  errorMessage={errors?.description?.message}
-                  // ref={descriptionRef}
-                  disabled={isLoading}
-                  {...register('description', {
-                    required: 'Service Description is required',
-                    validate: (value) => {
-                      if (!value.trim()) {
-                        return 'Service Description cannot be empty'
-                      }
-                      return true
-                    },
-                  })}
-                />
-
-                <TypeSelect
-                  disabled={isLoading}
-                  {...register('type', { required: true })}
+                  {...register('plant', { required: true })}
                 />
 
                 <Input
-                  id="hoursService"
-                  label="Hours"
-                  placeholder="Current Hours"
-                  errorMessage={errors?.hoursService?.message}
+                  id="manufacturer"
+                  label="Manufacturer"
+                  placeholder="Manufacturer"
+                  errorMessage={errors?.manufacturer?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('hoursService', {
-                    required: 'Amount of Hours is required',
+                  {...register('manufacturer', {
+                    required: 'Manufacturer is required',
+                    validate: (value) => {
+                      if (!value.trim()) {
+                        return 'Manufacturer cannot be empty'
+                      }
+                      return true
+                    },
+                  })}
+                />
+
+                <Input
+                  id="year"
+                  label="Years"
+                  placeholder="Years"
+                  errorMessage={errors?.year?.message}
+                  // ref={descriptionRef}
+                  disabled={isLoading}
+                  {...register('year', {
+                    required: 'Years is required',
+                    validate: (value) => {
+                      if (!value.trim()) {
+                        return 'Years cannot be empty'
+                      }
+                      return true
+                    },
+                  })}
+                />
+
+                <Input
+                  id="serial"
+                  label="Serial Number"
+                  placeholder="Serial Number"
+                  errorMessage={errors?.serial?.message}
+                  // ref={descriptionRef}
+                  disabled={isLoading}
+                  {...register('serial', {
+                    required: 'Serial Number is required',
+                    validate: (value) => {
+                      if (!value.trim()) {
+                        return 'Serial Number cannot be empty'
+                      }
+                      return true
+                    },
+                  })}
+                />
+
+                <ServiceFrequencySelect
+                  disabled={isLoading}
+                  {...register('serviceFrequency', { required: true })}
+                />
+
+                <Input
+                  id="hours"
+                  label="Hours"
+                  placeholder="Hours"
+                  errorMessage={errors?.hours?.message}
+                  // ref={descriptionRef}
+                  disabled={isLoading}
+                  {...register('hours', {
+                    required: 'Hours is required',
                     validate: (value) => {
                       if (!value.trim()) {
                         return 'Hours cannot be empty'
@@ -175,14 +220,14 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                   })}
                 />
 
-                <Input
-                  id="mileageService"
+                  <Input
+                  id="mileage"
                   label="Mileage"
-                  placeholder="Current Mileage"
-                  errorMessage={errors?.mileageService?.message}
+                  placeholder="Mileage"
+                  errorMessage={errors?.mileage?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('mileageService', {
+                  {...register('mileage', {
                     required: 'Mileage is required',
                     validate: (value) => {
                       if (!value.trim()) {
@@ -193,22 +238,9 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                   })}
                 />
 
-                <Input
-                  id="completedBy"
-                  label="Completed By"
-                  placeholder="Completed By"
-                  errorMessage={errors?.completedBy?.message}
-                  // ref={descriptionRef}
+                <StatusSelect
                   disabled={isLoading}
-                  {...register('completedBy', {
-                    required: 'Completed By is required',
-                    validate: (value) => {
-                      if (!value.trim()) {
-                        return 'Completed By cannot be empty'
-                      }
-                      return true
-                    },
-                  })}
+                  {...register('status', { required: true })}
                 />
 
                 <div className="flex gap-3">
@@ -241,9 +273,9 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
   )
 }
 
-AddHistoryDialog.propTypes = {
+AddMachineDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
 }
 
-export default AddHistoryDialog
+export default AddMachineDialog

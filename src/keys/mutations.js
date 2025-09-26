@@ -9,3 +9,9 @@ export const machineMutationKeys = {
   update: (machineId) => ['update-machine', machineId],
   delete: (machineId) => ['delete-machine', machineId],
 }
+
+export const historyMutationKeys = {
+  add: () => ['add-history'],
+  update: (historyId) => ['update-history', historyId],
+  delete: (historyId) => ['delete-history', historyId],
+}

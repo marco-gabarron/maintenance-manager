@@ -16,7 +16,6 @@ import ServiceHistoryItem from '../components/ServiceHistoryItem'
 import ServiceHistorySeparator from '../components/ServiceHistorySeparator'
 
 import { useGetMachine } from '../hooks/data/use-get-machine'
-import { useDeleteHistory } from '../hooks/data/use-delete-history'
 import { useUpdateMachine } from '../hooks/data/use-update-machine'
 import { useGetHistories } from '../hooks/data/use-get-histories'
 
@@ -48,20 +47,15 @@ const MachineDetailsPage = () => {
 
   const handleSaveClick = async (data) => {
     updateMachine(data, {
-      onSuccess: () => toast.success('Task updated successfully'),
-      onError: () => toast.error('Something went wrong when updating, Please try again!.'),
+      onSuccess: () => {
+        toast.success('Machine Details updated successfully')
+      },
+      onError: (error) => {
+        toast.error('Something went wrong while updating, Please try again!')
+      }
     })
   }
 
-  // const handleDeleteClick = async () => {
-  //   deleteTask(undefined, {
-  //     onSuccess: () => {
-  //       toast.success('Task deleted successfully')
-  //       navigate(-1)
-  //     },
-  //     onError: () => toast.error('Error when trying to delete task!'),
-  //   })
-  // }
 
   return (
     <div className="flex">

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const MachineCard = ({ id, mainText, area }) => {
+const MachineCard = ({ id, mainText }) => {
   return (
     // <div className="flex h-[150px] flex-col items-center justify-center gap-1 rounded-[px] bg-white">
     //   <div className="flex items-center gap-2">

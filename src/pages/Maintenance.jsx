@@ -1,5 +1,5 @@
 import MaintenanceAreaCards from '../components/MaintenanceAreaCards'
-import Header from '../components/Header'
+import HeaderMaintenance from '../components/HeaderMaintenance'
 import Sidebar from '../components/Sidebar'
 
 function Maintenance() {
@@ -7,7 +7,7 @@ function Maintenance() {
     <div className="flex">
       <Sidebar />
       <div className="w-full space-y-6 px-8 py-16">
-        <Header subtitle="Maintenance" title="Area" />
+        <HeaderMaintenance subtitle="Maintenance" title="Area" />
         <MaintenanceAreaCards />
       </div>
     </div>

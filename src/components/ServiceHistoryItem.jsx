@@ -70,9 +70,9 @@ const ServiceHistoryItem = ({ history }) => {
         <div
           className={`flex items-center justify-center p-2`}
         >
-          {history.type === 'breakdown' && 'Breakdown'}
-          {history.type === 'pm' && 'Preventive Maintenance'}
-          {history.type === 'service' && 'Service'}
+          {history.serviceType === 'breakdown' && 'Breakdown'}
+          {history.serviceType === 'pm' && 'Preventive Maintenance'}
+          {history.serviceType === 'service' && 'Service'}
         </div>
 
         <div

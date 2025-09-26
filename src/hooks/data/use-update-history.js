@@ -1,34 +1,32 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { machineMutationKeys } from '../../keys/mutations'
-import { machineQueryKeys } from '../../keys/queries'
+import { historyMutationKeys } from '../../keys/mutations'
+import { historyQueryKeys } from '../../keys/queries'
 import { api } from '../../lib/axios'
 
-export const useUpdateHistory = (machineId) => {
+export const useUpdateHistory = (historyId) => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationKey: machineMutationKeys.update(machineId),
+    mutationKey: historyMutationKeys.update(historyId),
     mutationFn: async (data) => {
-      const { data: updatedHistory } = await api.patch(`/maintenance/${machineId}`, {
-        title: data?.title?.trim(),
-        area: data?.area,
-        manufacturer: data?.manufacturer?.trim(),
-        year: data?.year?.trim(),
-        serial: data?.serial?.trim(),
-        serviceFrequency: data?.serviceFrequency,
-        hours: data?.hours?.trim(),
-        mileage: data?.mileage?.trim(),
-        status: data?.status,
+      const { data: updatedHistory } = await api.patch(`/history/${historyId}`, {
+        date: data?.date?.trim(),
+        service: data?.service,
+        description: data?.description?.trim(),
+        serviceType: data?.serviceType,
+        hoursService: data?.hoursService?.trim(),
+        mileageService: data?.mileageService?.trim(),
+        completedBy: data?.completedBy?.trim(),
       })
-      queryClient.setQueryData(machineQueryKeys.getAll(), (oldMachines) => {
-        return oldMachines.map((oldMachine) => {
-          if (oldMachine.id === machineId) {
+      queryClient.setQueryData(historyQueryKeys.getHistories(), (oldHistories) => {
+        return oldHistories?.map((oldHistory) => {
+          if (oldHistory.id === historyId) {
             return updatedHistory
           }
-          return oldMachine
+          return oldHistory
         })
       })
-      queryClient.setQueryData(machineQueryKeys.getOne(machineId), updatedHistory)
+      queryClient.setQueryData(historyQueryKeys.getHistory(historyId), updatedHistory)
     },
   })
 }

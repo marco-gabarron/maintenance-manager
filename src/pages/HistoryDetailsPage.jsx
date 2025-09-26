@@ -7,8 +7,6 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import Sidebar from '../components/Sidebar'
 
-import { useDeleteHistory } from '../hooks/data/use-delete-history'
-import { useUpdateMachine } from '../hooks/data/use-update-machine'
 import { useUpdateHistory } from '../hooks/data/use-update-history'
 import { useGetHistory } from '../hooks/data/use-get-history'
 import { useGetMachine } from '../hooks/data/use-get-machine'
@@ -28,8 +26,6 @@ const HistoryDetailsPage = ({}) => {
   } = useForm()
   const { mutate: updateHistory, isPending: updateHistoryIsLoading } =
     useUpdateHistory(historyId)
-  const { mutate: deleteHistory, isPending: deleteHistoryIsLoading } =
-    useDeleteHistory(historyId)
   const { data: history } = useGetHistory(historyId, reset)
   const { data: machine } = useGetMachine(history?.machineId, reset)
 
@@ -41,18 +37,8 @@ const HistoryDetailsPage = ({}) => {
 
   const handleSaveClick = async (data) => {
     updateHistory(data, {
-      onSuccess: () => toast.success('Task updated successfully'),
-      onError: () => toast.error('Something went wrong when updating.'),
-    })
-  }
-
-  const handleDeleteClick = async () => {
-    deleteTask(undefined, {
-      onSuccess: () => {
-        toast.success('Task deleted successfully')
-        navigate(-1)
-      },
-      onError: () => toast.error('Error when trying to delete task!'),
+      onSuccess: () => toast.success('Service History updated successfully'),
+      onError: () => toast.error('Something went wrong while updating, Please try again!'),
     })
   }
 
@@ -140,7 +126,7 @@ const HistoryDetailsPage = ({}) => {
          
                          <TypeSelect
                            disabled={isLoading}
-                           {...register('type', { required: true })}
+                           {...register('serviceType', { required: true })}
                          />
          
                          <Input

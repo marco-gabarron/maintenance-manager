@@ -20,15 +20,15 @@ export const useUpdateMachine = (machineId) => {
         mileage: data?.mileage?.trim(),
         status: data?.status,
       })
-      queryClient.setQueryData(machineQueryKeys.getAll(), (oldMachines) => {
-        return oldMachines.map((oldMachine) => {
+      queryClient.setQueryData(machineQueryKeys.getAllMachines(), (oldMachines) => {
+        return oldMachines?.map((oldMachine) => {
           if (oldMachine.id === machineId) {
             return updatedMachine
           }
           return oldMachine
         })
       })
-      queryClient.setQueryData(machineQueryKeys.getOne(machineId), updatedMachine)
+      queryClient.setQueryData(machineQueryKeys.getOneMachine(machineId), updatedMachine)
     },
   })
 }

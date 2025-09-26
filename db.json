@@ -27,6 +27,15 @@
       "time": "evening",
       "description": "Description",
       "status": "done"
+    },
+    {
+      "id": "ab0812dd-bf2d-43f5-84d4-22b4a1df8d0c",
+      "machineId": "10",
+      "date": "22/09/2025",
+      "service": "major",
+      "description": "Testing if able to add new",
+      "type": "service",
+      "completedBy": "MG"
     }
   ],
   "maintenance": [
@@ -34,92 +43,169 @@
       "id": "1",
       "area": "Pit",
       "title": "Volvo EC380",
-      "plant": "mobile"
+      "plant": "mobile",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "2",
       "area": "Pit",
       "title": "Volvo EC210",
-      "plant": "fixed"
+      "plant": "fixed",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "3",
       "area": "Pit",
       "title": "A40",
-      "plant": "mobile"
+      "plant": "mobile",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "4",
-      "area": "Concrete",
+      "area": "Pit",
       "title": "A25 C",
-      "plant": "mobile"
+      "plant": "mobile",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "5",
       "area": "Pit",
       "title": "A25 G",
-      "plant": "fixed"
+      "plant": "fixed",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "6",
-      "area": "Yard",
+      "area": "Pit",
       "title": "L150 E (2005)",
-      "plant": "mobile"
+      "plant": "mobile",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "7",
-      "area": "Blocks",
+      "area": "Pit",
       "title": "L150 H (2014)",
-      "plant": "mobile"
+      "plant": "mobile",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "8",
-      "area": "Blocks",
+      "area": "Pit",
       "title": "Cone (Pegson)",
-      "plant": "fixed"
+      "plant": "fixed",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "9",
-      "area": "Blocks",
+      "area": "Pit",
       "title": "Jaw",
-      "plant": "fixed"
+      "plant": "fixed",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "10",
       "area": "Precast",
       "title": "Barmac",
       "plant": "mobile",
-      "manufacturer": "Volvo",
-      "year": "2012",
-      "serial": "118245fd5d8dd1555",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
       "serviceFrequency": "1month",
-      "hours": "13619",
-      "mileage": "108150",
+      "hours": "626",
+      "mileage": "111111",
       "status": "active"
     },
     {
       "id": "11",
       "area": "Concrete",
       "title": "Finlay Triple deck Screen",
-      "plant": "fixed"
+      "plant": "fixed",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "12",
       "area": "Concrete",
       "title": "Double Deck",
-      "plant": "fixed"
+      "plant": "fixed",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     },
     {
       "id": "13",
       "area": "Concrete",
       "title": "CAT Genny",
       "plant": "fixed",
-      "manufacturer": "Volvo",
-      "year": "2018",
-      "serial": "118hds5fd5d8dd15",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
       "serviceFrequency": "1month",
-      "hours": "13619",
-      "mileage": "108500",
+      "hours": "626",
+      "mileage": "111111",
       "status": "active"
     },
     {
@@ -127,19 +213,26 @@
       "area": "Precast",
       "title": "Cummins Genny",
       "plant": "fixed",
-      "manufacturer": "Volvo",
-      "year": "2015",
-      "serial": "84985161sdfs8d4s8",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
       "serviceFrequency": "1month",
-      "hours": "551d",
-      "mileage": "854515",
+      "hours": "626",
+      "mileage": "111111",
       "status": "active"
     },
     {
       "id": "15",
       "area": "Yard",
       "title": "Genny",
-      "plant": "fixed"
+      "plant": "fixed",
+      "manufacturer": "kfkf",
+      "year": "545",
+      "serial": "62562",
+      "serviceFrequency": "1month",
+      "hours": "626",
+      "mileage": "111111",
+      "status": "active"
     }
   ],
   "history": [
@@ -149,9 +242,9 @@
       "date": "11/06/2025",
       "service": "minor",
       "description": "Water pump had to be replaced as water was leaking and could cause damage to bottle.",
-      "type": "pm",
+      "serviceType": "pm",
       "hoursService": "12001",
-      "mileageService": "68480",
+      "mileageService": "68470",
       "completedBy": "DK"
     },
     {
@@ -160,9 +253,9 @@
       "date": "19/09/2025",
       "service": "major",
       "description": "Service completed as per manufacturer guidelines preceding CVRT.",
-      "type": "breakdown",
+      "serviceType": "breakdown",
       "hoursService": "12995",
-      "mileageService": "88508",
+      "mileageService": "88510",
       "completedBy": "JOB"
     },
     {
@@ -171,9 +264,9 @@
       "date": "14/12/2025",
       "service": "minor",
       "description": "Service completed as per manufacturer guidelines. Bottle Motor and gear replaced",
-      "type": "pm",
+      "serviceType": "pm",
       "hoursService": "13619",
-      "mileageService": "108500",
+      "mileageService": "108600",
       "completedBy": "MG"
     },
     {
@@ -182,7 +275,7 @@
       "date": "11/06/2025",
       "service": "minor",
       "description": "Water pump had to be replaced as water was leaking and could cause damage to bottle.",
-      "type": "pm",
+      "serviceType": "pm",
       "hoursService": "12001",
       "mileageService": "68480",
       "completedBy": "DK"
@@ -193,10 +286,87 @@
       "date": "19/09/2025",
       "service": "major",
       "description": "Service completed as per manufacturer guidelines preceding CVRT.",
-      "type": "breakdown",
+      "serviceType": "breakdown",
       "hoursService": "12995",
       "mileageService": "88508",
       "completedBy": "JOB"
+    },
+    {
+      "id": "1e0115c3-dbdd-4212-b9ba-b7eb1624a71b",
+      "machineId": "10",
+      "date": "28/09/2025",
+      "service": "minor",
+      "description": "sdfsdfsd",
+      "serviceType": "pm",
+      "hoursService": "59509",
+      "mileageService": "65065650",
+      "completedBy": "MGG"
+    },
+    {
+      "id": "dfd526d7-c8d0-494f-aab7-617edcf35158",
+      "machineId": "10",
+      "date": "29/09/2025",
+      "service": "minor",
+      "description": "shdfh",
+      "serviceType": "pm",
+      "hoursService": "486457",
+      "mileageService": "3175465",
+      "completedBy": "KG"
+    },
+    {
+      "id": "74898a02-1c70-4e44-91ad-abd26f4f52cf",
+      "machineId": "10",
+      "date": "30/09/2025",
+      "service": "minor",
+      "description": "SDFSFS",
+      "serviceType": "pm",
+      "hoursService": "52545",
+      "mileageService": "525020",
+      "completedBy": "MGGG"
+    },
+    {
+      "id": "147fe8d5-b0a7-4d22-bbd5-6572b6f9cfc6",
+      "machineId": "10",
+      "date": "31/09/2025",
+      "service": "minor",
+      "description": "sdfs",
+      "serviceType": "pm",
+      "hoursService": "6509",
+      "mileageService": "62506",
+      "completedBy": "km"
+    },
+    {
+      "id": "363a91a7-1ae0-4f0b-bc02-36d7846a2530",
+      "machineId": "10",
+      "date": "10/10/2025",
+      "service": "minor",
+      "description": "dsfsafsd",
+      "serviceType": "pm",
+      "hoursService": "9590",
+      "mileageService": "590590",
+      "completedBy": "hg"
+    },
+    {
+      "id": "1031ec9a-9d74-4a5d-98ea-b481dedc348d",
+      "machineId": "10",
+      "date": "24/09/2025",
+      "service": "major",
+      "description": "Testing if changes worked",
+      "serviceType": "pm",
+      "hoursService": "11111",
+      "mileageService": "111111",
+      "completedBy": "MG"
+    },
+    {
+      "id": "b3b83ccf-a790-4c34-b98f-13d47bd5d8a2",
+      "machineId": "8",
+      "date": "26/09/2025",
+      "service": "minor",
+      "description": "Breakdown, pipe had to be replaced.",
+      "serviceType": "pm",
+      "hoursService": "54000",
+      "mileageService": "525000",
+      "completedBy": "MG"
     }
   ]
 }

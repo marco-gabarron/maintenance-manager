@@ -147,7 +147,6 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
                   <Button
                     size="medium"
                     className="w-full"
-                    onClick={handleSaveClick}
                     disabled={isLoading}
                     type="submit"
                   >

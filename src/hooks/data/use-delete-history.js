@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { machineMutationKeys } from '../../keys/mutations'
+import { historyMutationKeys } from '../../keys/mutations'
 import { machineQueryKeys } from '../../keys/queries'
 import { api } from '../../lib/axios'
 
 export const useDeleteHistory = (machineId) => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationKey: machineMutationKeys.delete(machineId),
+    mutationKey: historyMutationKeys.delete(machineId),
     mutationFn: async () => {
       const { data: deletedHistory } = await api.delete(`/maintenance/${machineId}`)
       return deletedHistory
