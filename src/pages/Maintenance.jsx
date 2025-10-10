@@ -1,5 +1,5 @@
-import MaintenanceAreaCards from '../components/MaintenanceAreaCards'
 import HeaderMaintenance from '../components/HeaderMaintenance'
+import MaintenanceAreaCards from '../components/MaintenanceAreaCards'
 import Sidebar from '../components/Sidebar'
 
 function Maintenance() {

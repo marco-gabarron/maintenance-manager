@@ -10,14 +10,20 @@ export const useAddHistory = () => {
     mutationKey: historyMutationKeys.add(),
     mutationFn: async (history) => {
       //Call API and update with new task
-      const { data: createdHistory } = await api.post('/history', history)
+      const { data: createdHistory } = await api.post(
+        '/api/create/history',
+        history
+      )
       return createdHistory
     },
 
     onSuccess: (createdHistory) => {
-      queryClient.setQueryData(historyQueryKeys.getHistories(), (oldHistories) => {
-        return [...oldHistories, createdHistory]
-      })
+      queryClient.setQueryData(
+        historyQueryKeys.getHistories(),
+        (oldHistories) => {
+          return [...oldHistories, createdHistory]
+        }
+      )
     },
   })
 }

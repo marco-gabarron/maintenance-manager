@@ -7,7 +7,9 @@ export const useGetMachine = (machineId, reset) => {
   return useQuery({
     queryKey: machineQueryKeys.getOneMachine(machineId),
     queryFn: async () => {
-      const { data: machine } = await api.get(`/maintenance/${machineId}`)
+      const { data: machine } = await api.get(
+        `/maintenance/machine/${machineId}`
+      )
       reset(machine)
       return machine
     },

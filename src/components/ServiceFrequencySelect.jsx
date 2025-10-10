@@ -23,11 +23,11 @@ import InputLabel from './InputLabel'
 const ServiceFrequencySelect = forwardRef((props, ref) => {
   return (
     <div className="flex flex-col gap-1 text-left">
-      <InputLabel htmlFor="serviceFrequency">Service Frequency</InputLabel>
+      <InputLabel htmlFor="service_frequency">Service Frequency</InputLabel>
 
       <select
-        id="serviceFrequency"
-        className="outline-brand-primary placeholder:text-brand-text-gray rounded-lg border border-solid border-[#ECECEC] px-4 py-3 placeholder:text-sm"
+        id="service_frequency"
+        className="rounded-lg border border-solid border-[#ECECEC] px-4 py-3 outline-brand-primary placeholder:text-sm placeholder:text-brand-text-gray"
         ref={ref}
         {...props}
       >

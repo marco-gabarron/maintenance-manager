@@ -13,11 +13,14 @@ const MachineCard = ({ id, mainText }) => {
     // </div>
 
     // First Option
-<Link to={`/machine/${id}`} class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{mainText}</h5>
-</Link>
-
-
+    <Link
+      to={`/maintenance/machine/${id}`}
+      className="block max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+    >
+      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        {mainText}
+      </h5>
+    </Link>
   )
 }
 

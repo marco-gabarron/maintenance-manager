@@ -6,13 +6,13 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
+import HistoryDetailsPage from './pages/HistoryDetailsPage.jsx'
 import HomePage from './pages/home.jsx'
-import TaskDetailsPage from './pages/TaskDetailsPage.jsx'
-import TasksPage from './pages/Tasks.jsx'
+import MachineDetailsPage from './pages/MachineDetailsPage.jsx'
 import Maintenance from './pages/Maintenance.jsx'
 import Maintenance2Page from './pages/Maintenance2Page.jsx'
-import MachineDetailsPage from './pages/MachineDetailsPage.jsx'
-import HistoryDetailsPage from './pages/HistoryDetailsPage.jsx'
+import TaskDetailsPage from './pages/TaskDetailsPage.jsx'
+import TasksPage from './pages/Tasks.jsx'
 
 const queryClient = new QueryClient()
 
@@ -29,20 +29,20 @@ const router = createBrowserRouter([
     path: '/task/:taskId',
     element: <TaskDetailsPage />,
   },
-   {
-    path: '/maintenance',
+  {
+    path: '/maintenance/areas',
     element: <Maintenance />,
   },
   {
-    path: '/maintenance/:categorie',
+    path: '/maintenance/machines/:areaId',
     element: <Maintenance2Page />,
   },
   {
-    path: '/machine/:machineId',
+    path: '/maintenance/machine/:machineId',
     element: <MachineDetailsPage />,
   },
   {
-    path: '/history/:historyId',
+    path: '/maintenance/history/:historyId',
     element: <HistoryDetailsPage />,
   },
 ])

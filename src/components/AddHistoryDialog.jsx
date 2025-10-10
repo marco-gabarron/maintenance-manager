@@ -1,20 +1,19 @@
 import './AddTaskDialog.css'
 
-import PropTypes, { number } from 'prop-types'
+import PropTypes from 'prop-types'
 import { useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm } from 'react-hook-form'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'sonner'
-import { v4 } from 'uuid'
 
 import { LoaderIcon } from '../assets/icons'
 import { useAddHistory } from '../hooks/data/use-add-history'
 import Button from './Button'
-import Input from './Input'
 import DescriptionTextArea from './DescriptionTextArea'
-import TypeSelect from './TypeSelect'
+import Input from './Input'
 import ServiceSelect from './ServiceSelect'
+import TypeSelect from './TypeSelect'
 
 const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
   const { mutate } = useAddHistory()
@@ -25,13 +24,13 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
     reset,
   } = useForm({
     defaultValues: {
-    date: '',
-    service: 'minor',
-    description: '',
-    serviceType: 'pm',
-    hoursService: '',
-    mileageService: '',
-    completedBy: ''
+      date: '',
+      service_level: 'minor',
+      description: '',
+      service_type: 'pm',
+      hours_service: '',
+      mileage_service: '',
+      completed_by: '',
     },
   })
 
@@ -39,50 +38,48 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
 
   const handleSaveClick = async (data) => {
     const history = {
-      id: v4(),
-      machineId: machineId,
-      date: data?.date?.trim(),
-      service: data?.service,
+      machine_id: machineId,
+      date: data?.date,
+      service_level: data?.service_level,
       description: data?.description?.trim(),
-      serviceType: data?.serviceType,
-      hoursService: data?.hoursService?.trim(),
-      mileageService: data?.mileageService?.trim(),
-      completedBy: data?.completedBy?.trim(),
+      service_type: data?.service_type,
+      hours_service: parseInt(data?.hours_service?.trim()),
+      mileage_service: parseInt(data?.mileage_service?.trim()),
+      completed_by: data?.completed_by?.trim(),
     }
 
     mutate(history, {
       onSuccess: () => {
         handleClose()
         reset({
-            date: '',
-            service: 'minor',
-            description: '',
-            serviceType: 'pm',
-            hoursService: '',
-            mileageService: '',
-            completedBy: '',
+          date: '',
+          service_level: 'minor',
+          description: '',
+          service_type: 'pm',
+          hours_service: '',
+          mileage_service: '',
+          completed_by: '',
         })
       },
       onError: () => {
         toast.error('Something went wrong while adding task. Please try again!')
-      }
+      },
     })
   }
 
   const handleCancelClick = () => {
     reset({
-        date: '',
-        service: 'minor',
-        description: '',
-        serviceType: 'pm',
-        hoursService: '',
-        mileageService: '',
-        completedBy: '',
+      date: '',
+      service_level: 'minor',
+      description: '',
+      service_type: 'pm',
+      hours_service: '',
+      mileage_service: '',
+      completed_by: '',
     })
     handleClose()
   }
 
-  
   return (
     <CSSTransition
       nodeRef={nodeRef}
@@ -131,7 +128,7 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
 
                 <ServiceSelect
                   disabled={isLoading}
-                  {...register('service', { required: true })}
+                  {...register('service_level', { required: true })}
                 />
 
                 <DescriptionTextArea
@@ -154,17 +151,17 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
 
                 <TypeSelect
                   disabled={isLoading}
-                  {...register('type', { required: true })}
+                  {...register('service_type', { required: true })}
                 />
 
                 <Input
-                  id="hoursService"
+                  id="hours_service"
                   label="Hours"
                   placeholder="Current Hours"
-                  errorMessage={errors?.hoursService?.message}
+                  errorMessage={errors?.hours_service?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('hoursService', {
+                  {...register('hours_service', {
                     required: 'Amount of Hours is required',
                     validate: (value) => {
                       if (!value.trim()) {
@@ -176,13 +173,13 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                 />
 
                 <Input
-                  id="mileageService"
+                  id="mileage_service"
                   label="Mileage"
                   placeholder="Current Mileage"
-                  errorMessage={errors?.mileageService?.message}
+                  errorMessage={errors?.mileage_service?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('mileageService', {
+                  {...register('mileage_service', {
                     required: 'Mileage is required',
                     validate: (value) => {
                       if (!value.trim()) {
@@ -194,13 +191,13 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                 />
 
                 <Input
-                  id="completedBy"
+                  id="completed_by"
                   label="Completed By"
                   placeholder="Completed By"
-                  errorMessage={errors?.completedBy?.message}
+                  errorMessage={errors?.completed_by?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('completedBy', {
+                  {...register('completed_by', {
                     required: 'Completed By is required',
                     validate: (value) => {
                       if (!value.trim()) {

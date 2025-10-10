@@ -1,19 +1,18 @@
 import './AddTaskDialog.css'
 
-import PropTypes, { number } from 'prop-types'
+import PropTypes from 'prop-types'
 import { useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm } from 'react-hook-form'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'sonner'
-import { v4 } from 'uuid'
 
 import { LoaderIcon } from '../assets/icons'
 import { useAddMachine } from '../hooks/data/use-add-machine'
 import Button from './Button'
 import Input from './Input'
-import ServiceFrequencySelect from './ServiceFrequencySelect'
 import PlantSelect from './PlantSelect'
+import ServiceFrequencySelect from './ServiceFrequencySelect'
 import StatusSelect from './StatusSelect'
 
 const AddMachineDialog = ({ isOpen, handleClose, area }) => {
@@ -25,15 +24,15 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
     reset,
   } = useForm({
     defaultValues: {
-    title: '',
-    plant: 'mobile',
-    manufacturer: '',
-    year: '',
-    serial: '',
-    serviceFrequency: '1month',
-    hours: '',
-    mileage: '',
-    status: 'active'
+      model: '',
+      plant: 'mobile',
+      manufacturer: '',
+      year: '',
+      serial_number: '',
+      service_frequency: '1month',
+      hours: '',
+      mileage: '',
+      status: 'active',
     },
   })
 
@@ -41,57 +40,55 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
 
   const handleSaveClick = async (data) => {
     const machine = {
-        id: v4(),
-        area: area,
-        title: data?.title?.trim(),
-        plant: data?.plant,
-        manufacturer: data?.manufacturer?.trim(),
-        year: data?.year?.trim(),
-        serial: data?.serial?.trim(),
-        serviceFrequency: data?.serviceFrequency,
-        hours: data?.hours?.trim(),
-        mileage: data?.mileage?.trim(),
-        status: data?.status,
+      area_id: area,
+      model: data?.title?.trim(),
+      plant: data?.plant,
+      manufacturer: data?.manufacturer?.trim(),
+      year: data?.year?.trim(),
+      serial_number: data?.serial_number?.trim(),
+      service_frequency: data?.service_frequency,
+      hours: parseInt(data?.hours?.trim()),
+      mileage: parseInt(data?.mileage?.trim()),
+      status: data?.status,
     }
 
     mutate(machine, {
       onSuccess: () => {
         handleClose()
         reset({
-            title: '',
-            plant: 'mobile',
-            manufacturer: '',
-            year: '',
-            serial: '',
-            serviceFrequency: '1month',
-            hours: '',
-            mileage: '',
-            status: 'active'
+          model: '',
+          plant: 'mobile',
+          manufacturer: '',
+          year: '',
+          serial_number: '',
+          service_frequency: '1month',
+          hours: '',
+          mileage: '',
+          status: 'active',
         })
       },
       onError: (error) => {
         toast.error('Something went wrong while adding task. Please try again!')
         console.log('Error adding machine:', error)
-      }
+      },
     })
   }
 
   const handleCancelClick = () => {
     reset({
-        title: '',
-        plant: 'mobile',
-        manufacturer: '',
-        year: '',
-        serial: '',
-        serviceFrequency: '1month',
-        hours: '',
-        mileage: '',
-        status: 'active'
+      model: '',
+      plant: 'mobile',
+      manufacturer: '',
+      year: '',
+      serial_number: '',
+      service_frequency: '1month',
+      hours: '',
+      mileage: '',
+      status: 'active',
     })
     handleClose()
   }
 
-  
   return (
     <CSSTransition
       nodeRef={nodeRef}
@@ -163,8 +160,8 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
 
                 <Input
                   id="year"
-                  label="Years"
-                  placeholder="Years"
+                  label="Year"
+                  placeholder="Year"
                   errorMessage={errors?.year?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
@@ -180,13 +177,13 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
                 />
 
                 <Input
-                  id="serial"
+                  id="serial_number"
                   label="Serial Number"
                   placeholder="Serial Number"
-                  errorMessage={errors?.serial?.message}
+                  errorMessage={errors?.serial_number?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('serial', {
+                  {...register('serial_number', {
                     required: 'Serial Number is required',
                     validate: (value) => {
                       if (!value.trim()) {
@@ -199,7 +196,7 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
 
                 <ServiceFrequencySelect
                   disabled={isLoading}
-                  {...register('serviceFrequency', { required: true })}
+                  {...register('service_frequency', { required: true })}
                 />
 
                 <Input
@@ -220,7 +217,7 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
                   })}
                 />
 
-                  <Input
+                <Input
                   id="mileage"
                   label="Mileage"
                   placeholder="Mileage"

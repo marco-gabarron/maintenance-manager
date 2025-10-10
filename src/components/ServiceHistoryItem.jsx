@@ -1,136 +1,70 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { toast } from 'sonner'
 
-import { CheckIcon, DetailsIcon, LoaderIcon, TrashIcon } from '../assets/icons'
-import Button from './Button'
-import { useUpdateMachine } from '../hooks/data/use-update-machine'
-import { useDeleteHistory } from '../hooks/data/use-delete-history'
+import { DetailsIcon } from '../assets/icons'
+// import { useDeleteHistory } from '../hooks/data/use-delete-history'
+// import { useUpdateMachine } from '../hooks/data/use-update-machine'
+// import Button from './Button'
 
 const ServiceHistoryItem = ({ history }) => {
-  // const { mutate, isPending } = useDeleteHistory(machine.id)
-  // const { mutate: updateHistory } = useUpdateHistory(machine.id)
-
-  const handleDeleteClick = async () => {
-    mutate(undefined, {
-      onSuccess: () => {
-        toast.success('Task has been deleted successfully!')
-      },
-      onError: () => {
-        toast.error('Task Deletion failed!')
-      },
-    })
-  }
-
-  const getStatusClasses = () => {
-    if (task.status === 'done') {
-      return 'bg-brand-primary text-brand-primary'
-    }
-    if (task.status === 'in_progress') {
-      return 'bg-brand-process text-brand-process'
-    }
-    if (task.status === 'not_started') {
-      return 'bg-brand-dark-blue bg-opacity-5 text-brand-dark-blue'
-    }
-  }
-
-  const getNewStatus = () => {
-    if (task.status === 'not_started') {
-      return 'in_progress'
-    }
-    if (task.status === 'in_progress') {
-      return 'done'
-    }
-    return 'not_started'
-  }
-
-  const handleCheckBoxClick = () => {
-    updateTask(
-      {
-        status: getNewStatus(),
-      },
-      {
-        onSuccess: () => toast.success('Task status updated successfully!'),
-        onError: () => 'Error while updating task status, please try again!',
-      }
-    )
-  }
+  const date = new Date(history.date)
+  history.date = date.toLocaleDateString('en-GB')
 
   return (
     <div
-      className={`flex items-center gap-3 rounded-lg bg-opacity-10 px-4 py-3 text-sm transition bg-brand-dark-blue bg-opacity-5 text-brand-dark-blue hover:bg-gray-50`}
+      className={`flex items-center gap-3 rounded-lg bg-brand-dark-blue bg-opacity-5 px-4 py-3 text-sm text-brand-dark-blue transition hover:bg-gray-50`}
     >
-      <div className="grid grid-cols-9 items-center justify-center divide-x-2 w-full">
-        <div
-          className={`flex items-center justify-center p-2`}
-        >
+      <div className="grid w-full grid-cols-9 items-center justify-center divide-x-2">
+        <div className={`flex items-center justify-center p-2`}>
           {history.date}
         </div>
 
-        <div
-          className={`flex items-center justify-center p-2`}
-        >
-          {history.serviceType === 'breakdown' && 'Breakdown'}
-          {history.serviceType === 'pm' && 'Preventive Maintenance'}
-          {history.serviceType === 'service' && 'Service'}
+        <div className={`flex items-center justify-center p-2`}>
+          {history.service_type === 'breakdown' && 'Breakdown'}
+          {history.service_type === 'pm' && 'Preventive Maintenance'}
+          {history.service_type === 'service' && 'Service'}
         </div>
 
-        <div
-          className={`flex items-center justify-center p-2`}
-        >
-          {history.service === 'minor' && 'Minor'}
-          {history.service === 'major' && 'Major'}
+        <div className={`flex items-center justify-center p-2`}>
+          {history.service_level === 'minor' && 'Minor'}
+          {history.service_level === 'major' && 'Major'}
         </div>
 
-        <div
-          className={`flex items-center justify-center p-2 col-span-3`}
-        >
+        <div className={`col-span-3 flex items-center justify-center p-2`}>
           {history.description}
         </div>
 
-        <div
-          className={`flex items-center justify-center p-2`}
-        >
-           {history.hoursService}
+        <div className={`flex items-center justify-center p-2`}>
+          {history.hours_service}
         </div>
 
-        <div
-          className={`flex items-center justify-center p-2`}
-        >
-           {history.mileageService}
-        </div> 
-
-        <div
-          className={`flex items-center justify-center p-2`}
-        >
-           
-        {history.completedBy}
+        <div className={`flex items-center justify-center p-2`}>
+          {history.mileage_service}
         </div>
-      
-        
+
+        <div className={`flex items-center justify-center p-2`}>
+          {history.completed_by}
+        </div>
       </div>
 
       {/* <Button color="ghost" onClick={handleDeleteClick}>
             <TrashIcon className="text-brand-text-gray" />
         </Button> */}
 
-        <Link to={`/history/${history?.id}`}>
-          <DetailsIcon />
-        </Link>
+      <Link to={`/maintenance/history/${history?.id}`}>
+        <DetailsIcon />
+      </Link>
     </div>
   )
 }
 
 ServiceHistoryItem.propTypes = {
   history: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    // category: PropTypes.string.isRequired,
     description: PropTypes.string,
-    type: PropTypes.oneOf(['breakdown', 'service', 'pm']).isRequired,
-    hours: PropTypes.string,
-    mileage: PropTypes.string,
-    completedBy: PropTypes.string,
+    service_type: PropTypes.oneOf(['breakdown', 'service', 'pm']).isRequired,
+    hours_service: PropTypes.number,
+    mileage_service: PropTypes.number,
+    completed_by: PropTypes.string,
   }).isRequired,
 }
 

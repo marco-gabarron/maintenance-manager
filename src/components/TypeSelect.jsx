@@ -23,11 +23,11 @@ import InputLabel from './InputLabel'
 const TypeSelect = forwardRef((props, ref) => {
   return (
     <div className="flex flex-col gap-1 text-left">
-      <InputLabel htmlFor="serviceType">Type</InputLabel>
+      <InputLabel htmlFor="service_type">Type</InputLabel>
 
       <select
-        id="serviceType"
-        className="outline-brand-primary placeholder:text-brand-text-gray rounded-lg border border-solid border-[#ECECEC] px-4 py-3 placeholder:text-sm"
+        id="service_type"
+        className="rounded-lg border border-solid border-[#ECECEC] px-4 py-3 outline-brand-primary placeholder:text-sm placeholder:text-brand-text-gray"
         ref={ref}
         {...props}
       >

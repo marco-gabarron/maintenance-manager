@@ -9,26 +9,35 @@ export const useUpdateMachine = (machineId) => {
   return useMutation({
     mutationKey: machineMutationKeys.update(machineId),
     mutationFn: async (data) => {
-      const { data: updatedMachine } = await api.patch(`/maintenance/${machineId}`, {
-        title: data?.title?.trim(),
-        area: data?.area,
-        manufacturer: data?.manufacturer?.trim(),
-        year: data?.year?.trim(),
-        serial: data?.serial?.trim(),
-        serviceFrequency: data?.serviceFrequency,
-        hours: data?.hours?.trim(),
-        mileage: data?.mileage?.trim(),
-        status: data?.status,
-      })
-      queryClient.setQueryData(machineQueryKeys.getAllMachines(), (oldMachines) => {
-        return oldMachines?.map((oldMachine) => {
-          if (oldMachine.id === machineId) {
-            return updatedMachine
-          }
-          return oldMachine
-        })
-      })
-      queryClient.setQueryData(machineQueryKeys.getOneMachine(machineId), updatedMachine)
+      const { data: updatedMachine } = await api.patch(
+        `/api/update/machine/${machineId}`,
+        {
+          model: data?.model?.trim(),
+          area_id: data?.area_id,
+          manufacturer: data?.manufacturer?.trim(),
+          year: data?.year?.trim(),
+          serial_number: data?.serial_number?.trim(),
+          service_frequency: data?.service_frequency,
+          hours: data?.hours?.trim(),
+          mileage: data?.mileage?.trim(),
+          status: data?.status,
+        }
+      )
+      queryClient.setQueryData(
+        machineQueryKeys.getAllMachines(),
+        (oldMachines) => {
+          return oldMachines?.map((oldMachine) => {
+            if (oldMachine.id === machineId) {
+              return updatedMachine
+            }
+            return oldMachine
+          })
+        }
+      )
+      queryClient.setQueryData(
+        machineQueryKeys.getOneMachine(machineId),
+        updatedMachine
+      )
     },
   })
 }

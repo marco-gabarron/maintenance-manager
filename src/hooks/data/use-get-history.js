@@ -7,9 +7,11 @@ export const useGetHistory = (historyId, reset) => {
   return useQuery({
     queryKey: historyQueryKeys.getHistory(historyId),
     queryFn: async () => {
-      const { data: history } = await api.get(`/history/${historyId}`)
+      const { data: history } = await api.get(
+        `/maintenance/history/${historyId}`
+      )
       reset(history)
       return history
-    }
+    },
   })
 }

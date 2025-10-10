@@ -1,4 +1,4 @@
-import { HomeIcon, TasksIcon } from '../assets/icons'
+import { TasksIcon } from '../assets/icons'
 import SidebarButton from './SidebarButton'
 
 const Sidebar = () => {
@@ -8,23 +8,21 @@ const Sidebar = () => {
         <h1 className="text-xl font-semibold text-brand-primary">
           Hanlon Concrete
         </h1>
-        <p>
-          Maintenance Manager
-        </p>
+        <p>Maintenance Manager</p>
       </div>
 
       <div className="flex flex-col gap-2 p-2">
-        <SidebarButton href="/">
+        {/* <SidebarButton href="/">
           <HomeIcon />
           Home
-        </SidebarButton>
+        </SidebarButton> */}
         <SidebarButton href="/tasks">
           <TasksIcon />
-          My Tasks
+          Fleet
         </SidebarButton>
-        <SidebarButton href="/maintenance">
+        <SidebarButton href="/maintenance/areas">
           <TasksIcon />
-          Maintenance
+          Fixed and Mobile Plant
         </SidebarButton>
       </div>
     </div>
