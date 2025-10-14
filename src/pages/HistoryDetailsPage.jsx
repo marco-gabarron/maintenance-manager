@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
 import { ArrowLeftIcon, ChevronRightIcon } from '../assets/icons'
-import Button from '../components/Button'
+// import Button from '../components/Button'
 import Input from '../components/Input'
 import ServiceSelect from '../components/ServiceSelect'
 import Sidebar from '../components/Sidebar'
@@ -187,7 +187,7 @@ const HistoryDetailsPage = () => {
             />
           </div>
 
-          <div className="mt-2 flex w-full justify-end">
+          {/* <div className="mt-2 flex w-full justify-end">
             <Button
               size="large"
               color="primary"
@@ -197,7 +197,7 @@ const HistoryDetailsPage = () => {
             >
               Save
             </Button>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>

@@ -255,7 +255,7 @@ const MachineDetailsPage = () => {
             </div>
           </div>
 
-          <div className="flex w-full justify-end gap-3">
+          {/* <div className="flex w-full justify-end gap-3">
             <Button
               size="large"
               color="primary"
@@ -265,7 +265,7 @@ const MachineDetailsPage = () => {
             >
               Save
             </Button>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>

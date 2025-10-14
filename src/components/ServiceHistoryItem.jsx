@@ -7,8 +7,8 @@ import { DetailsIcon } from '../assets/icons'
 // import Button from './Button'
 
 const ServiceHistoryItem = ({ history }) => {
-  const date = new Date(history.date)
-  history.date = date.toLocaleDateString('en-GB')
+  // const date = new Date(history.date)
+  // history.date = date.toLocaleDateString('en-GB')
 
   return (
     <div
