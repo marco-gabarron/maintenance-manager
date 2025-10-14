@@ -16,13 +16,13 @@ const Sidebar = () => {
           <HomeIcon />
           Home
         </SidebarButton> */}
-        <SidebarButton href="/tasks">
-          <TasksIcon />
-          Fleet
-        </SidebarButton>
         <SidebarButton href="/maintenance/areas">
           <TasksIcon />
           Fixed and Mobile Plant
+        </SidebarButton>
+        <SidebarButton href="/tasks">
+          <TasksIcon />
+          Fleet
         </SidebarButton>
       </div>
     </div>

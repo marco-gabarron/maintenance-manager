@@ -32,10 +32,10 @@ const ServiceFrequencySelect = forwardRef((props, ref) => {
         {...props}
       >
         <option value="1month">1 Month</option>
-        <option value="3month">3 Months</option>
-        <option value="6month">6 Months</option>
-        <option value="9month">9 Months</option>
-        <option value="12month">12 Months</option>
+        <option value="3months">3 Months</option>
+        <option value="6months">6 Months</option>
+        <option value="9months">9 Months</option>
+        <option value="12months">12 Months</option>
       </select>
     </div>
   )
