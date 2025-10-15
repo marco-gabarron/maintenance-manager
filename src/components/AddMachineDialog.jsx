@@ -183,20 +183,12 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
                   errorMessage={errors?.serial_number?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('serial_number', {
-                    required: 'Serial Number is required',
-                    validate: (value) => {
-                      if (!value.trim()) {
-                        return 'Serial Number cannot be empty'
-                      }
-                      return true
-                    },
-                  })}
+                  {...register('serial_number', { required: false })}
                 />
 
                 <ServiceFrequencySelect
                   disabled={isLoading}
-                  {...register('service_frequency', { required: true })}
+                  {...register('service_frequency', { required: false })}
                 />
 
                 <Input
@@ -206,15 +198,7 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
                   errorMessage={errors?.hours?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('hours', {
-                    required: 'Hours is required',
-                    validate: (value) => {
-                      if (!value.trim()) {
-                        return 'Hours cannot be empty'
-                      }
-                      return true
-                    },
-                  })}
+                  {...register('hours', { required: false })}
                 />
 
                 <Input
@@ -224,15 +208,7 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
                   errorMessage={errors?.mileage?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('mileage', {
-                    required: 'Mileage is required',
-                    validate: (value) => {
-                      if (!value.trim()) {
-                        return 'Mileage cannot be empty'
-                      }
-                      return true
-                    },
-                  })}
+                  {...register('mileage', { required: false })}
                 />
 
                 <StatusSelect

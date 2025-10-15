@@ -161,15 +161,7 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                   errorMessage={errors?.hours_service?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('hours_service', {
-                    required: 'Amount of Hours is required',
-                    validate: (value) => {
-                      if (!value.trim()) {
-                        return 'Hours cannot be empty'
-                      }
-                      return true
-                    },
-                  })}
+                  {...register('hours_service', { required: false })}
                 />
 
                 <Input
@@ -179,15 +171,7 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                   errorMessage={errors?.mileage_service?.message}
                   // ref={descriptionRef}
                   disabled={isLoading}
-                  {...register('mileage_service', {
-                    required: 'Mileage is required',
-                    validate: (value) => {
-                      if (!value.trim()) {
-                        return 'Mileage cannot be empty'
-                      }
-                      return true
-                    },
-                  })}
+                  {...register('mileage_service', { required: false })}
                 />
 
                 <Input
