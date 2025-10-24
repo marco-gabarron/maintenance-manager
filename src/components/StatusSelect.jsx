@@ -9,14 +9,14 @@ const StatusSelect = forwardRef((props, ref) => {
 
       <select
         id="status"
-        className="outline-brand-primary placeholder:text-brand-text-gray rounded-lg border border-solid border-[#ECECEC] px-4 py-3 placeholder:text-sm"
+        className="rounded-lg border border-solid border-[#ECECEC] px-4 py-3 outline-brand-primary placeholder:text-sm placeholder:text-brand-text-gray"
         ref={ref}
         {...props}
       >
         <option value="active">Active</option>
-        <option value="inactiveSold">Inactive (Sold)</option>
-        <option value="inactiveTraded">Inactive (Traded)</option>
-        <option value="inactiveScrapped">Inactive (Scrapped)</option>
+        <option value="inactive(replaced)">Inactive (Replaced)</option>
+        <option value="inactive(breakdown)">Inactive (Breakdown)</option>
+        <option value="inactive(scrapped)">Inactive (Scrapped)</option>
       </select>
     </div>
   )
