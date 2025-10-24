@@ -6,36 +6,18 @@ import { useGetAreas } from '../hooks/data/use-get-area'
 const MaintenanceAreaCards = () => {
   const { data: areas } = useGetAreas()
   return (
-    <div className="grid grid-cols-5 gap-6">
-      {/* map through areas from database */}
-      {areas?.map((area) => (
-        <MaintenanceAreaCard key={area.id} id={area.id} mainText={area.title} />
-      ))}
-      {/* 
-      <MaintenanceAreaCard
-        mainText="Pit"
-        secondaryText="Excavator, Dumper, Loading Shovel, Generator, Jaw, Barmax VSI, ConeCrusher"
-      />
-      <MaintenanceAreaCard
-        mainText="Concrete"
-        secondaryText="Mixer, Loading Shovel. Mini-Digger, Powerwasher"
-      />
-      <MaintenanceAreaCard
-        mainText="Blocks"
-        secondaryText="Mixer, Block, Strapper, Strapper Head, Forklift"
-      />
-      <MaintenanceAreaCard
-        mainText="Precast"
-        secondaryText="Forklift, Megacast, Pallet Handler"
-      />
-      <MaintenanceAreaCard
-        mainText="Yard"
-        secondaryText="Forklift, Compressor"
-      />
-      <MaintenanceAreaCard
-        mainText="Archived"
-        secondaryText="Status: Not Active"
-      /> */}
+    <div>
+      <h1 className="my-2 text-xl font-semibold">Areas</h1>
+      <div className="grid grid-cols-5 gap-6">
+        {/* map through areas from database */}
+        {areas?.map((area) => (
+          <MaintenanceAreaCard
+            key={area.id}
+            id={area.id}
+            mainText={area.title}
+          />
+        ))}
+      </div>
     </div>
   )
 }

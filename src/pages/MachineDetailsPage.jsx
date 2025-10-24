@@ -8,6 +8,7 @@ import AddHistoryDialog from '../components/AddHistoryDialog'
 import AreaSelect from '../components/AreaSelect'
 import Button from '../components/Button'
 import Input from '../components/Input'
+import InputLabel from '../components/InputLabel'
 import ServiceFrequencySelect from '../components/ServiceFrequencySelect'
 import ServiceHistoryItem from '../components/ServiceHistoryItem'
 import ServiceHistorySeparator from '../components/ServiceHistorySeparator'
@@ -105,7 +106,25 @@ const MachineDetailsPage = () => {
 
         <form onSubmit={handleSubmit(handleSaveClick)}>
           <div className="grid grid-cols-5 gap-3 rounded-xl bg-brand-white p-4 text-center">
-            <div className="col-span-2">
+            <div>
+              <Input
+                id="machine_type"
+                label="Machine Type"
+                // defaultValue={task?.title}
+                errorMessage={errors?.machine_type?.message}
+                {...register('machine_type', {
+                  required: 'Please fill Machine Type',
+                  validate: (value) => {
+                    if (!value.trim()) {
+                      return 'Machine Type cannot be empty'
+                    }
+                    return true
+                  },
+                })}
+              />
+            </div>
+
+            <div>
               <Input
                 id="model"
                 label="Model"
@@ -156,13 +175,7 @@ const MachineDetailsPage = () => {
                 // defaultValue={task?.description}
                 errorMessage={errors?.year?.message}
                 {...register('year', {
-                  required: 'Please fill Year',
-                  validate: (value) => {
-                    if (!value.trim()) {
-                      return 'Year cannot be empty'
-                    }
-                    return true
-                  },
+                  required: true,
                 })}
               />
             </div>
@@ -199,13 +212,7 @@ const MachineDetailsPage = () => {
                 // defaultValue={task?.description}
                 errorMessage={errors?.hours?.message}
                 {...register('hours', {
-                  required: 'Please fill Hours',
-                  validate: (value) => {
-                    if (!value.trim()) {
-                      return 'Hours cannot be empty'
-                    }
-                    return true
-                  },
+                  required: false,
                 })}
               />
             </div>
@@ -217,20 +224,23 @@ const MachineDetailsPage = () => {
                 // defaultValue={task?.description}
                 errorMessage={errors?.mileage?.message}
                 {...register('mileage', {
-                  required: 'Please fill Mileage',
-                  validate: (value) => {
-                    if (!value.trim()) {
-                      return 'Mileage cannot be empty'
-                    }
-                    return true
-                  },
+                  required: false,
                 })}
+              />
+            </div>
+
+            <div className="grid items-center gap-2">
+              <InputLabel htmlFor="brake_test">Brake Test</InputLabel>
+              <input
+                id="brake_test"
+                type="checkbox"
+                {...register('brake_test', { required: false })}
               />
             </div>
 
             <StatusSelect
               {...register('status', {
-                required: 'Please fill Area',
+                required: false,
               })}
             />
           </div>
@@ -255,17 +265,11 @@ const MachineDetailsPage = () => {
             </div>
           </div>
 
-          {/* <div className="flex w-full justify-end gap-3">
-            <Button
-              size="large"
-              color="primary"
-              // onClick={handleSaveClick}
-              //disabled={updateTaskIsLoading || deleteTaskIsLoading}
-              type="submit"
-            >
+          <div className="flex w-full justify-end gap-3">
+            <Button size="large" color="primary" type="submit">
               Save
             </Button>
-          </div> */}
+          </div>
         </form>
       </div>
     </div>

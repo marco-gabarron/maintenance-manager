@@ -1,15 +1,18 @@
+import { format, parseISO } from 'date-fns'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
 import { ArrowLeftIcon, ChevronRightIcon } from '../assets/icons'
+import Button from '../components/Button'
 // import Button from '../components/Button'
 import Input from '../components/Input'
 import ServiceSelect from '../components/ServiceSelect'
 import Sidebar from '../components/Sidebar'
 import TypeSelect from '../components/TypeSelect'
 import { useGetHistory } from '../hooks/data/use-get-history'
-import { useGetMachine } from '../hooks/data/use-get-machine'
+// import { useGetMachine } from '../hooks/data/use-get-machine'
 import { useUpdateHistory } from '../hooks/data/use-update-history'
 
 const HistoryDetailsPage = () => {
@@ -22,19 +25,41 @@ const HistoryDetailsPage = () => {
     handleSubmit,
     reset,
   } = useForm()
+
   const { mutate: updateHistory } = useUpdateHistory(historyId)
   const { data: history } = useGetHistory(historyId, reset)
-  const { data: machine } = useGetMachine(history?.machine_id, reset)
 
-  // history.date = date.toLocaleDateString('en-GB')
+  // const { data: machine } = useGetMachine(history?.machine_id, reset)
 
-  //const { mutate: updateTask, isPending: updateTaskIsLoading } = useUpdateTask(machineId)
+  const [date, setDate] = React.useState('')
+
+  React.useEffect(() => {
+    if (!history) return
+
+    const dateObj =
+      typeof history.date === 'string'
+        ? parseISO(history.date)
+        : history.date
+          ? new Date(history.date)
+          : null
+
+    setDate(dateObj ? format(dateObj, 'yyyy-MM-dd') : '')
+  }, [history])
+
+  // const formattedDate = history?.date
+  //   ? format(history?.date, 'yyyy-MM-dd') // display as dd/MM/yyyy
+  //   : ''
+
+  const handleDateChange = (event) => {
+    setDate(event.target.value)
+  }
 
   const handleBackClick = () => {
     navigate(-1)
   }
 
   const handleSaveClick = async (data) => {
+    data.date = date
     updateHistory(data, {
       onSuccess: () => toast.success('Service History updated successfully'),
       onError: () =>
@@ -56,24 +81,28 @@ const HistoryDetailsPage = () => {
               <ArrowLeftIcon />
             </button>
 
-            <h1 className="text-xl font-semibold">{machine?.model}</h1>
+            <h1 className="text-xl font-semibold">
+              {/* {machine?.model} */}
+              Machine
+            </h1>
           </div>
         </div>
 
         {/* Left Side */}
         <div className="flex items-center gap-1 text-xs">
           <Link
-            to={`/maintenance/areas/${machine?.area_id}`}
+            to={`/maintenance/areas`}
             className="cursor-pointer text-brand-text-gray"
           >
-            {machine?.area_id}
+            Area
           </Link>
           <ChevronRightIcon className="text-brand-text-gray" />
           <Link
-            to={`/maintenance/machine/${machine?.ID}`}
+            to={`/maintenance/machine/${history?.machine_id}`}
             className="cursor-pointer text-brand-text-gray"
           >
-            {machine?.model}
+            Model
+            {/* {machine?.model} */}
           </Link>
           <ChevronRightIcon className="text-brand-text-gray" />
           <span className="font-semibold text-brand-primary">
@@ -87,20 +116,11 @@ const HistoryDetailsPage = () => {
               id="date"
               label="Service Date"
               placeholder="Enter Service Date"
-              // value={title}
-              // onChange={(event) => {
-              //   setTitle(event.target.value)
-              // }}
+              type="date"
               errorMessage={errors?.date?.message}
-              {...register('date', {
-                required: 'Date is required',
-                validate: (value) => {
-                  if (!value.trim()) {
-                    return 'Date cannot be empty'
-                  }
-                  return true
-                },
-              })}
+              // {...register('date')}
+              value={date}
+              onChange={handleDateChange}
               disabled={isLoading}
             />
 
@@ -142,7 +162,7 @@ const HistoryDetailsPage = () => {
               {...register('hours_service', {
                 required: 'Amount of Hours is required',
                 validate: (value) => {
-                  if (!value.trim()) {
+                  if (!value) {
                     return 'Hours cannot be empty'
                   }
                   return true
@@ -160,7 +180,7 @@ const HistoryDetailsPage = () => {
               {...register('mileage_service', {
                 required: 'Mileage is required',
                 validate: (value) => {
-                  if (!value.trim()) {
+                  if (!value) {
                     return 'Mileage cannot be empty'
                   }
                   return true
@@ -187,7 +207,7 @@ const HistoryDetailsPage = () => {
             />
           </div>
 
-          {/* <div className="mt-2 flex w-full justify-end">
+          <div className="mt-2 flex w-full justify-end">
             <Button
               size="large"
               color="primary"
@@ -197,7 +217,7 @@ const HistoryDetailsPage = () => {
             >
               Save
             </Button>
-          </div> */}
+          </div>
         </form>
       </div>
     </div>

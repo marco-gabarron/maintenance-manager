@@ -12,17 +12,21 @@ export const useUpdateMachine = (machineId) => {
       const { data: updatedMachine } = await api.patch(
         `/api/update/machine/${machineId}`,
         {
+          machine_type: data?.machine_type?.trim(),
           model: data?.model?.trim(),
+          plant: data?.plant,
           area_id: data?.area_id,
           manufacturer: data?.manufacturer?.trim(),
-          year: data?.year?.trim(),
+          year: data?.year,
           serial_number: data?.serial_number?.trim(),
+          brake_test: data?.brake_test,
           service_frequency: data?.service_frequency,
-          hours: data?.hours?.trim(),
-          mileage: data?.mileage?.trim(),
+          hours: data?.hours,
+          mileage: data?.mileage,
           status: data?.status,
         }
       )
+
       queryClient.setQueryData(
         machineQueryKeys.getAllMachines(),
         (oldMachines) => {
@@ -34,6 +38,7 @@ export const useUpdateMachine = (machineId) => {
           })
         }
       )
+
       queryClient.setQueryData(
         machineQueryKeys.getOneMachine(machineId),
         updatedMachine

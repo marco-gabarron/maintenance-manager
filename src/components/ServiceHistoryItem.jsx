@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
@@ -9,6 +10,7 @@ import { DetailsIcon } from '../assets/icons'
 const ServiceHistoryItem = ({ history }) => {
   // const date = new Date(history.date)
   // history.date = date.toLocaleDateString('en-GB')
+  const dateFormatted = format(new Date(history.date), 'dd/MM/yyyy')
 
   return (
     <div
@@ -16,7 +18,7 @@ const ServiceHistoryItem = ({ history }) => {
     >
       <div className="grid w-full grid-cols-9 items-center justify-center divide-x-2">
         <div className={`flex items-center justify-center p-2`}>
-          {history.date}
+          {dateFormatted}
         </div>
 
         <div className={`flex items-center justify-center p-2`}>

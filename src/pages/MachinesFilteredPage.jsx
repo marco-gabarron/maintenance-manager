@@ -1,41 +1,18 @@
 // import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { ArrowLeftIcon, ChevronRightIcon } from '../assets/icons'
-import { AddIcon } from '../assets/icons'
-import AddMachineDialog from '../components/AddMachineDialog'
-import Button from '../components/Button'
 import MachineCard from '../components/MachineCard'
 import Sidebar from '../components/Sidebar'
-import { useGetArea, useGetMachines } from '../hooks/data/use-get-machines'
-// import { pitQueryKeys } from '../keys/queries'
-// import { api } from '../lib/axios'
+import { useGetFilteredMachines } from '../hooks/data/use-get-filteredmachines'
 
-// const useGetPit = () => {
-//   return useQuery({
-//     queryKey: pitQueryKeys.getPit(),
-//     queryFn: async () => {
-//       const { data: pit } = await api.get('/maintenance')
-//       return pit
-//     },
-//   })
-// }
-
-const Maintenance2Page = () => {
-  const { areaId } = useParams()
+const MachinesFilteredPage = () => {
+  const { filterKey } = useParams()
   // const { data: pit } = useGetPit()
-  const { data: area } = useGetArea(areaId)
-  const { data: machines } = useGetMachines(areaId)
+  const { data: machines } = useGetFilteredMachines(filterKey)
 
   const navigate = useNavigate()
-  const [addMachineDialogIsOpen, setAddMachineDialogIsOpen] = useState(false)
 
-  // const pitMaintenance = machines?.filter((machine) => {
-  //   if (machine.status === 'active' && machine.area_id === areaId) {
-  //     return machine
-  //   }
-  // })
   const mobilePit = machines?.filter((machine) => machine.plant === 'mobile')
   const fixedPit = machines?.filter((machine) => machine.plant === 'fixed')
 
@@ -65,27 +42,11 @@ const Maintenance2Page = () => {
             </Link>
             <ChevronRightIcon className="text-brand-text-gray" />
             <span className="font-semibold text-brand-primary">
-              {area?.title}
+              {filterKey}
             </span>
           </div>
           <div className="flex w-full justify-between">
-            <h1 className="mt-2 text-xl font-semibold">
-              {area?.title} Machines
-            </h1>
-
-            <div className="flex items-center gap-3">
-              {/* If something simple, it can be passed like that () => setAddTaskDialogIsOpen(true) */}
-              <Button onClick={() => setAddMachineDialogIsOpen(true)}>
-                <AddIcon />
-                Add New Machine
-              </Button>
-              <AddMachineDialog
-                isOpen={addMachineDialogIsOpen}
-                // If its something more complicated its worth to use like this and create a function up there
-                handleClose={() => setAddMachineDialogIsOpen(false)}
-                area={area?.id}
-              />
-            </div>
+            <h1 className="mt-2 text-xl font-semibold">{filterKey} Machines</h1>
           </div>
         </div>
 
@@ -100,7 +61,6 @@ const Maintenance2Page = () => {
                   machineTypeText={machine.machine_type}
                   mainText={machine.model}
                   statusText={machine.status}
-                  area={area?.title}
                 />
               ))}
             </div>
@@ -117,7 +77,6 @@ const Maintenance2Page = () => {
                   machineTypeText={machine.machine_type}
                   mainText={machine.model}
                   statusText={machine.status}
-                  area={area?.title}
                 />
               ))}
             </div>
@@ -128,4 +87,4 @@ const Maintenance2Page = () => {
   )
 }
 
-export default Maintenance2Page
+export default MachinesFilteredPage

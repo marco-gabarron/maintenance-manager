@@ -7,27 +7,17 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
 import HistoryDetailsPage from './pages/HistoryDetailsPage.jsx'
-import HomePage from './pages/home.jsx'
 import MachineDetailsPage from './pages/MachineDetailsPage.jsx'
+import MachinesFilteredPage from './pages/MachinesFilteredPage.jsx'
 import Maintenance from './pages/Maintenance.jsx'
 import Maintenance2Page from './pages/Maintenance2Page.jsx'
-import TaskDetailsPage from './pages/TaskDetailsPage.jsx'
-import TasksPage from './pages/Tasks.jsx'
 
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
-  },
-  {
-    path: '/tasks',
-    element: <TasksPage />,
-  },
-  {
-    path: '/task/:taskId',
-    element: <TaskDetailsPage />,
+    element: <Maintenance />,
   },
   {
     path: '/maintenance/areas',
@@ -44,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: '/maintenance/history/:historyId',
     element: <HistoryDetailsPage />,
+  },
+  {
+    path: '/machines/:filterKey',
+    element: <MachinesFilteredPage />,
   },
 ])
 

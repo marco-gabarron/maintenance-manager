@@ -113,6 +113,7 @@ const AddHistoryDialog = ({ isOpen, handleClose, machineId, machineTitle }) => {
                   // onChange={(event) => {
                   //   setTitle(event.target.value)
                   // }}
+                  type="date"
                   errorMessage={errors?.date?.message}
                   {...register('date', {
                     required: 'Date is required',

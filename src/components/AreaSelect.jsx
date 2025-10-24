@@ -2,24 +2,6 @@ import { forwardRef } from 'react'
 
 import InputLabel from './InputLabel'
 
-// const TimeSelect = (props) => {
-//   return (
-//     <div className="flex flex-col gap-1 text-left">
-//       <InputLabel htmlFor="time">Time</InputLabel>
-
-//       <select
-//         id="time"
-//         className="rounded-lg border border-solid border-[#ECECEC] px-4 py-3 outline-brand-primary placeholder:text-sm placeholder:text-brand-text-gray"
-//         {...props}
-//       >
-//         <option value="morning">Morning</option>
-//         <option value="afternoon">Afternoon</option>
-//         <option value="evening">Evening</option>
-//       </select>
-//     </div>
-//   )
-// }
-
 const AreaSelect = forwardRef((props, ref) => {
   return (
     <div className="flex flex-col gap-1 text-left">
@@ -33,9 +15,9 @@ const AreaSelect = forwardRef((props, ref) => {
       >
         <option value="1">Pit</option>
         <option value="2">Blocks</option>
-        <option value="3">Yard</option>
+        <option value="3">Ready-Mix</option>
         <option value="4">Precast</option>
-        <option value="5">Concrete</option>
+        <option value="5">Yard</option>
       </select>
     </div>
   )
