@@ -5,6 +5,7 @@ import { machineQueryKeys } from '../../keys/queries'
 import { api } from '../../lib/axios'
 
 export const useAddMachine = () => {
+  //Before upload file implementation
   const queryClient = useQueryClient()
   return useMutation({
     mutationKey: machineMutationKeys.add(),
@@ -14,7 +15,7 @@ export const useAddMachine = () => {
         '/api/create/machine',
         machine
       )
-      return createdMachine
+      return createdMachine[0]
     },
 
     onSuccess: (createdMachine) => {

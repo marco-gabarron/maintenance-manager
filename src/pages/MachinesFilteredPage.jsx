@@ -16,6 +16,15 @@ const MachinesFilteredPage = () => {
   const mobilePit = machines?.filter((machine) => machine.plant === 'mobile')
   const fixedPit = machines?.filter((machine) => machine.plant === 'fixed')
 
+  const filterKeyTitle =
+    filterKey === 'archived'
+      ? 'Archived'
+      : filterKey === 'summary'
+        ? 'Summary'
+        : filterKey === 'braketest'
+          ? 'Brake Test'
+          : 'Not Found'
+
   const handleBackClick = () => {
     navigate(-1)
   }
@@ -42,11 +51,13 @@ const MachinesFilteredPage = () => {
             </Link>
             <ChevronRightIcon className="text-brand-text-gray" />
             <span className="font-semibold text-brand-primary">
-              {filterKey}
+              {filterKeyTitle}
             </span>
           </div>
           <div className="flex w-full justify-between">
-            <h1 className="mt-2 text-xl font-semibold">{filterKey} Machines</h1>
+            <h1 className="mt-2 text-xl font-semibold">
+              {filterKeyTitle} Machines
+            </h1>
           </div>
         </div>
 

@@ -16,11 +16,14 @@ import Sidebar from '../components/Sidebar'
 import StatusSelect from '../components/StatusSelect'
 import { useGetHistories } from '../hooks/data/use-get-histories'
 import { useGetMachine } from '../hooks/data/use-get-machine'
-import { useGetArea } from '../hooks/data/use-get-machines'
 import { useUpdateMachine } from '../hooks/data/use-update-machine'
 
 const MachineDetailsPage = () => {
   const { machineId } = useParams()
+  let search = window.location.search
+  let params = new URLSearchParams(search)
+  const area = params.get('area')
+
   const navigate = useNavigate()
 
   const {
@@ -34,9 +37,7 @@ const MachineDetailsPage = () => {
   //   useDeleteHistory(machineId)
   const { data: machine } = useGetMachine(machineId, reset)
   const { data: histories } = useGetHistories(machineId)
-  const { data: area } = useGetArea(machine?.area_id)
 
-  //const { mutate: updateTask, isPending: updateTaskIsLoading } = useUpdateTask(machineId)
   const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false)
 
   const handleBackClick = () => {
@@ -96,7 +97,7 @@ const MachineDetailsPage = () => {
             to={`/maintenance/machines/${machine?.area_id}`}
             className="cursor-pointer text-brand-text-gray"
           >
-            {area?.title}
+            {area}
           </Link>
           <ChevronRightIcon className="text-brand-text-gray" />
           <span className="font-semibold text-brand-primary">
@@ -110,7 +111,6 @@ const MachineDetailsPage = () => {
               <Input
                 id="machine_type"
                 label="Machine Type"
-                // defaultValue={task?.title}
                 errorMessage={errors?.machine_type?.message}
                 {...register('machine_type', {
                   required: 'Please fill Machine Type',
@@ -237,12 +237,26 @@ const MachineDetailsPage = () => {
                 {...register('brake_test', { required: false })}
               />
             </div>
+            <div>
+              <StatusSelect
+                {...register('status', {
+                  required: false,
+                })}
+              />
+            </div>
 
-            <StatusSelect
-              {...register('status', {
-                required: false,
-              })}
-            />
+            {/*<div className="flex flex-col gap-2">
+              <InputLabel htmlFor="service_agreement">
+                Service Agreement
+              </InputLabel>
+              <a
+                href="http://localhost:8080/api/downloads"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Precast Sizes
+               </a>
+            </div> */}
           </div>
 
           {/* Second Part of Details - History */}

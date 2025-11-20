@@ -9,6 +9,7 @@ import { toast } from 'sonner'
 
 import { LoaderIcon } from '../assets/icons'
 import { useAddMachine } from '../hooks/data/use-add-machine'
+// import { api } from '../lib/axios'
 import Button from './Button'
 import Input from './Input'
 import InputLabel from './InputLabel'
@@ -16,8 +17,14 @@ import PlantSelect from './PlantSelect'
 import ServiceFrequencySelect from './ServiceFrequencySelect'
 import StatusSelect from './StatusSelect'
 
-const AddMachineDialog = ({ isOpen, handleClose, area }) => {
+const AddMachineDialog = ({ isOpen, handleClose, area, areaId }) => {
   const { mutate } = useAddMachine()
+
+  // const [selectedFile, setSelectedFile] = useState(null)
+  // const onFileChange = (event) => {
+  //   setSelectedFile(event.target.files[0])
+  // }
+
   const {
     register,
     formState: { errors, isSubmitting: isLoading },
@@ -42,8 +49,12 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
   const nodeRef = useRef()
 
   const handleSaveClick = async (data) => {
+    //before upload file implementation
+    // const formData = new FormData()
+    // formData.append('file', selectedFile, selectedFile.name)
+
     const machine = {
-      area_id: area,
+      area_id: areaId,
       machine_type: data?.machine_type?.trim(),
       model: data?.model?.trim(),
       plant: data?.plant,
@@ -55,6 +66,8 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
       hours: parseInt(data?.hours),
       mileage: parseInt(data?.mileage),
       status: data?.status,
+      // file: formData,
+      // file_service_agreement: null,
     }
     mutate(machine, {
       onSuccess: () => {
@@ -78,6 +91,56 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
         console.log('Error adding machine:', error)
       },
     })
+
+    //after upload file implementation
+    // build plain object for machine fields (no file)
+    // const machinePayload = {
+    //   area_id: areaId,
+    //   machine_type: data?.machine_type?.trim(),
+    //   model: data?.model?.trim(),
+    //   plant: data?.plant,
+    //   manufacturer: data?.manufacturer?.trim(),
+    //   year: data?.year ? parseInt(String(data.year), 10) : null,
+    //   serial_number: data?.serial_number?.trim(),
+    //   brake_test: !!data?.brake_test,
+    //   service_frequency: data?.service_frequency,
+    //   hours: data?.hours ? parseInt(String(data.hours), 10) : null,
+    //   mileage: data?.mileage ? parseInt(String(data.mileage), 10) : null,
+    //   status: data?.status,
+    //   file_service_agreement: null,
+    // }
+
+    // // create FormData and append JSON + optional file
+    // const formData = new FormData()
+    // formData.append('machine', JSON.stringify(machinePayload))
+    // if (selectedFile) {
+    //   formData.append('file', selectedFile, selectedFile.name)
+    // }
+
+    // // send FormData to the mutation
+    // mutate(formData, {
+    //   onSuccess: () => {
+    //     handleClose()
+    //     reset({
+    //       machine_type: '',
+    //       model: '',
+    //       plant: 'mobile',
+    //       manufacturer: '',
+    //       year: '',
+    //       serial_number: '',
+    //       brake_test: false,
+    //       service_frequency: '1month',
+    //       hours: '',
+    //       mileage: '',
+    //       status: 'active',
+    //     })
+    //     setSelectedFile(null)
+    //   },
+    //   onError: (error) => {
+    //     toast.error('Something went wrong while adding task. Please try again!')
+    //     console.log('Error adding machine:', error)
+    //   },
+    // })
   }
 
   const handleCancelClick = () => {
@@ -113,7 +176,7 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
           >
             <div className="rounded-xl bg-white p-5 text-center shadow">
               <h2 className="text-xl font-semibold text-brand-dark-blue">
-                Add New Machine
+                Add New Machine to {area}
               </h2>
               <form onSubmit={handleSubmit(handleSaveClick)}>
                 <div className="space-3 grid w-[636px] grid-cols-2 flex-col gap-3 pt-5">
@@ -247,6 +310,10 @@ const AddMachineDialog = ({ isOpen, handleClose, area }) => {
                       {...register('brake_test', { required: false })}
                     />
                   </div>
+                  {/* <div className="grid items-center gap-3">
+                    <InputLabel htmlFor="uploadFile">File</InputLabel>
+                    <input type="file" onChange={OnFileChange} />
+                  </div> */}
                 </div>
 
                 <div className="mt-3 grid grid-cols-2 gap-3">

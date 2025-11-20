@@ -9,33 +9,15 @@ import Button from '../components/Button'
 import MachineCard from '../components/MachineCard'
 import Sidebar from '../components/Sidebar'
 import { useGetArea, useGetMachines } from '../hooks/data/use-get-machines'
-// import { pitQueryKeys } from '../keys/queries'
-// import { api } from '../lib/axios'
-
-// const useGetPit = () => {
-//   return useQuery({
-//     queryKey: pitQueryKeys.getPit(),
-//     queryFn: async () => {
-//       const { data: pit } = await api.get('/maintenance')
-//       return pit
-//     },
-//   })
-// }
 
 const Maintenance2Page = () => {
   const { areaId } = useParams()
-  // const { data: pit } = useGetPit()
   const { data: area } = useGetArea(areaId)
   const { data: machines } = useGetMachines(areaId)
 
   const navigate = useNavigate()
   const [addMachineDialogIsOpen, setAddMachineDialogIsOpen] = useState(false)
 
-  // const pitMaintenance = machines?.filter((machine) => {
-  //   if (machine.status === 'active' && machine.area_id === areaId) {
-  //     return machine
-  //   }
-  // })
   const mobilePit = machines?.filter((machine) => machine.plant === 'mobile')
   const fixedPit = machines?.filter((machine) => machine.plant === 'fixed')
 
@@ -83,7 +65,8 @@ const Maintenance2Page = () => {
                 isOpen={addMachineDialogIsOpen}
                 // If its something more complicated its worth to use like this and create a function up there
                 handleClose={() => setAddMachineDialogIsOpen(false)}
-                area={area?.id}
+                area={area?.title}
+                areaId={areaId}
               />
             </div>
           </div>
