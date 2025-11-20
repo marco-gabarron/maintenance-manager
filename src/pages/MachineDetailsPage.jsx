@@ -9,6 +9,7 @@ import AreaSelect from '../components/AreaSelect'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import InputLabel from '../components/InputLabel'
+import PlantSelect from '../components/PlantSelect'
 import ServiceFrequencySelect from '../components/ServiceFrequencySelect'
 import ServiceHistoryItem from '../components/ServiceHistoryItem'
 import ServiceHistorySeparator from '../components/ServiceHistorySeparator'
@@ -236,6 +237,9 @@ const MachineDetailsPage = () => {
                 type="checkbox"
                 {...register('brake_test', { required: false })}
               />
+            </div>
+            <div>
+              <PlantSelect {...register('plant', { required: true })} />
             </div>
             <div>
               <StatusSelect
