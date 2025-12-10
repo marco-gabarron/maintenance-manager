@@ -6,17 +6,18 @@ import MaintenanceFilterLinksCard from '../components/MaintenanceFilterLinksCard
 const filters = [
   {
     key: 'archived',
-    title: 'Archived',
+    title: 'Archived List',
     status: 'Inactives',
   },
   {
     key: 'summary',
-    title: 'Summary',
-    status: 'All Machines',
+    title: 'Summary List',
+    status: 'All Machines List',
   },
   {
     key: 'braketest',
-    title: 'Brake Test',
+    title: 'Brake Test List',
+    status: 'Brake Test Required',
   },
 ]
 
@@ -26,6 +27,12 @@ const MaintenanceFilterLinksCards = () => {
     <div>
       <h1 className="my-2 text-xl font-semibold">Filters</h1>
       <div className="grid grid-cols-5 gap-6">
+        <MaintenanceFilterLinksCard
+          key={'archivedList'}
+          filterKey={'archivedList'}
+          mainText={'Archived'}
+          statusText={'Archived Machines'}
+        />
         {/* map through areas from database */}
         {filters?.map((filter) => (
           <MaintenanceFilterLinksCard

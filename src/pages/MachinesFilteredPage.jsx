@@ -1,10 +1,15 @@
 // import { useQuery } from '@tanstack/react-query'
+import { saveAs } from 'file-saver'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
+import SummaryTable from '@/components/summary-table'
+
 import { ArrowLeftIcon, ChevronRightIcon } from '../assets/icons'
+import Button from '../components/Button'
 import MachineCard from '../components/MachineCard'
 import Sidebar from '../components/Sidebar'
 import { useGetFilteredMachines } from '../hooks/data/use-get-filteredmachines'
+import { api } from '../lib/axios'
 
 const MachinesFilteredPage = () => {
   const { filterKey } = useParams()
@@ -23,10 +28,23 @@ const MachinesFilteredPage = () => {
         ? 'Summary'
         : filterKey === 'braketest'
           ? 'Brake Test'
-          : 'Not Found'
+          : filterKey === 'archivedList'
+            ? 'Archived'
+            : 'Not Found'
 
   const handleBackClick = () => {
     navigate(-1)
+  }
+
+  const handleExportClick = async (filterKey) => {
+    const response = await api.get(
+      `/maintenance/download/spreadsheet?filter=${filterKey}`,
+      {
+        responseType: 'blob',
+      }
+    )
+
+    saveAs(response.data, 'maintenance_data.xlsx')
   }
 
   return (
@@ -58,41 +76,50 @@ const MachinesFilteredPage = () => {
             <h1 className="mt-2 text-xl font-semibold">
               {filterKeyTitle} Machines
             </h1>
+            <Button onClick={() => handleExportClick(filterKey)}>
+              Export to Excel
+            </Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-16">
-          <div className="text-center">
-            <h1 className="my-2 text-xl font-semibold">Mobile Plant:</h1>
-            <div className="grid grid-cols-2 gap-2">
-              {mobilePit?.map((machine) => (
-                <MachineCard
-                  key={machine.id}
-                  id={machine.id}
-                  machineTypeText={machine.machine_type}
-                  mainText={machine.model}
-                  statusText={machine.status}
-                />
-              ))}
+        {filterKey === 'archivedList' ? (
+          <div className="grid grid-cols-2 gap-16">
+            <div className="text-center">
+              <h1 className="my-2 text-xl font-semibold">Mobile Plant:</h1>
+              <div className="grid grid-cols-2 gap-2">
+                {mobilePit?.map((machine) => (
+                  <MachineCard
+                    key={machine.id}
+                    id={machine.id}
+                    machineTypeText={machine.machine_type}
+                    mainText={machine.model}
+                    statusText={machine.status}
+                    area={machine.area}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="text-center">
+              <h1 className="my-2 text-xl font-semibold">Fixed Plant:</h1>
+
+              <div className="grid grid-cols-2 gap-2">
+                {fixedPit?.map((machine) => (
+                  <MachineCard
+                    key={machine.id}
+                    id={machine.id}
+                    machineTypeText={machine.machine_type}
+                    mainText={machine.model}
+                    statusText={machine.status}
+                    area={machine.area}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-
-          <div className="text-center">
-            <h1 className="my-2 text-xl font-semibold">Fixed Plant:</h1>
-
-            <div className="grid grid-cols-2 gap-2">
-              {fixedPit?.map((machine) => (
-                <MachineCard
-                  key={machine.id}
-                  id={machine.id}
-                  machineTypeText={machine.machine_type}
-                  mainText={machine.model}
-                  statusText={machine.status}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        ) : (
+          <SummaryTable data={machines} />
+        )}
       </div>
     </div>
   )
