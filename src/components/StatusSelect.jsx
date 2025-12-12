@@ -17,6 +17,7 @@ const StatusSelect = forwardRef((props, ref) => {
         <option value="inactive(replaced)">Inactive (Replaced)</option>
         <option value="inactive(breakdown)">Inactive (Breakdown)</option>
         <option value="inactive(scrapped)">Inactive (Scrapped)</option>
+        <option value="inactive(delete)">Inactive (Deleted)</option>
       </select>
     </div>
   )
