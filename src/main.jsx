@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
 import HistoryDetailsPage from './pages/HistoryDetailsPage.jsx'
+import HomePage from './pages/home'
 import MachineDetailsPage from './pages/MachineDetailsPage.jsx'
 import MachinesFilteredPage from './pages/MachinesFilteredPage.jsx'
 import Maintenance from './pages/Maintenance.jsx'
@@ -17,7 +18,7 @@ const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Maintenance />,
+    element: <HomePage />,
   },
   {
     path: '/maintenance/areas',

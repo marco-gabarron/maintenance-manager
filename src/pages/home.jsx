@@ -1,38 +1,54 @@
 // import DashboardCard from '../components/DashboardCard'
 
-import DashboardCards from '../components/DashboardCards'
-import Header from '../components/Header'
-import Sidebar from '../components/Sidebar'
-import TaskItem from '../components/TaskItem'
-import { useGetTasks } from '../hooks/data/use-get-tasks'
+import { EyeIcon } from 'lucide-react'
+import { EyeOffIcon } from 'lucide-react'
+import { useState } from 'react'
+
+import { Button } from '@/components/ui/Button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/Input'
+
+import InputLabel from '../components/InputLabel'
 
 function HomePage() {
-  const { data: tasks } = useGetTasks()
+  const [passwordIdVisible, setPasswordIdVisible] = useState(false)
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="w-full space-y-6 px-8 py-16">
-        <Header subtitle="Dashboard" title="Dashboard" />
-        <DashboardCards />
-        <div className="grid grid-cols-[1.5fr,1fr] gap-6">
-          <div className="space-y-6 rounded-[10px] bg-white p-6">
-            <div>
-              <h3 className="text-xl font-semibold">Tasks</h3>
-              <span className="text-sm text-brand-dark-gray">
-                Tasks Available summary
-              </span>
-            </div>
-            <div className="space-y-3">
-              {tasks?.map((task) => (
-                <TaskItem key={task.id} task={task} />
-              ))}
-            </div>
+    <div className="flex h-screen w-screen items-center justify-center">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>Enter Details</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <InputLabel> Email</InputLabel>
+          <Input id="email" type="email" placeholder="Enter Email"></Input>
+          <InputLabel>Password</InputLabel>
+          <div className="relative">
+            <Input
+              id="password"
+              type={passwordIdVisible ? 'text' : 'password'}
+              placeholder="Enter Password"
+            ></Input>
+            <Button
+              variant="ghost"
+              className="absolute bottom-0 right-0 top-0 my-auto mr-1 h-8 w-8 text-muted-foreground"
+              onClick={() => setPasswordIdVisible((prev) => !prev)}
+            >
+              {passwordIdVisible ? <EyeOffIcon /> : <EyeIcon />}
+            </Button>
           </div>
-          <div className="flex items-center justify-center space-y-6 rounded-[10px] bg-white p-6">
-            <p className="text-brand-dark-gray">Notes or reminders</p>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+        <CardFooter>
+          <Button>Login</Button>
+        </CardFooter>
+      </Card>
     </div>
   )
 }

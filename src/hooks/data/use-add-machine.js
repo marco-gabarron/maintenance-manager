@@ -5,15 +5,24 @@ import { machineQueryKeys } from '../../keys/queries'
 import { api } from '../../lib/axios'
 
 export const useAddMachine = () => {
-  //Before upload file implementation
   const queryClient = useQueryClient()
   return useMutation({
     mutationKey: machineMutationKeys.add(),
-    mutationFn: async (machine) => {
-      //Call API and update with new task
+    mutationFn: async (formData) => {
+      // Handle both FormData (with file) and regular object (without file)
+      const config =
+        formData instanceof FormData
+          ? {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            }
+          : {}
+
       const { data: createdMachine } = await api.post(
         '/api/create/machine',
-        machine
+        formData,
+        config
       )
       return createdMachine[0]
     },

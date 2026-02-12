@@ -15,6 +15,7 @@ import ServiceHistoryItem from '../components/ServiceHistoryItem'
 import ServiceHistorySeparator from '../components/ServiceHistorySeparator'
 import Sidebar from '../components/Sidebar'
 import StatusSelect from '../components/StatusSelect'
+import { useGetFile } from '../hooks/data/use-get-file'
 import { useGetHistories } from '../hooks/data/use-get-histories'
 import { useGetMachine } from '../hooks/data/use-get-machine'
 import { useUpdateMachine } from '../hooks/data/use-update-machine'
@@ -38,6 +39,10 @@ const MachineDetailsPage = () => {
   //   useDeleteHistory(machineId)
   const { data: machine } = useGetMachine(machineId, reset)
   const { data: histories } = useGetHistories(machineId)
+  const { data: file } = useGetFile(
+    machine?.file_service_agreement,
+    'service-agreement'
+  )
 
   const [addTaskDialogIsOpen, setAddTaskDialogIsOpen] = useState(false)
 
@@ -55,6 +60,20 @@ const MachineDetailsPage = () => {
         toast.error('Something went wrong while updating, Please try again!')
       },
     })
+  }
+
+  const handleOpenServiceAgreement = (e) => {
+    e.preventDefault()
+    if (file) {
+      // Create a blob URL and open in new tab
+      const blobUrl = URL.createObjectURL(file)
+      window.open(blobUrl, '_blank')
+
+      // Optional: cleanup the URL after a delay
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 100)
+    } else {
+      toast.error('No Service Agreement file uploaded for this machine.')
+    }
   }
 
   return (
@@ -249,18 +268,21 @@ const MachineDetailsPage = () => {
               />
             </div>
 
-            {/*<div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <InputLabel htmlFor="service_agreement">
                 Service Agreement
               </InputLabel>
-              <a
-                href="http://localhost:8080/api/downloads"
-                target="_blank"
-                rel="noreferrer"
+              <button
+                onClick={handleOpenServiceAgreement}
+                // href="http://localhost:8080/api/downloads"
+                // target="_blank"
+                // rel="noreferrer"
               >
-                Precast Sizes
-               </a>
-            </div> */}
+                {machine?.file_service_agreement
+                  ? machine.file_service_agreement
+                  : 'No File Uploaded'}
+              </button>
+            </div>
           </div>
 
           {/* Second Part of Details - History */}

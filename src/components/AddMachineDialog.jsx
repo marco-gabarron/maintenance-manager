@@ -1,7 +1,7 @@
 import './AddTaskDialog.css'
 
 import PropTypes from 'prop-types'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm } from 'react-hook-form'
 import { CSSTransition } from 'react-transition-group'
@@ -19,11 +19,11 @@ import StatusSelect from './StatusSelect'
 
 const AddMachineDialog = ({ isOpen, handleClose, area, areaId }) => {
   const { mutate } = useAddMachine()
+  const [selectedFile, setSelectedFile] = useState(null)
 
-  // const [selectedFile, setSelectedFile] = useState(null)
-  // const onFileChange = (event) => {
-  //   setSelectedFile(event.target.files[0])
-  // }
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
 
   const {
     register,
@@ -49,27 +49,29 @@ const AddMachineDialog = ({ isOpen, handleClose, area, areaId }) => {
   const nodeRef = useRef()
 
   const handleSaveClick = async (data) => {
-    //before upload file implementation
-    // const formData = new FormData()
-    // formData.append('file', selectedFile, selectedFile.name)
+    // Create FormData for multipart upload
+    const formData = new FormData()
 
-    const machine = {
-      area_id: areaId,
-      machine_type: data?.machine_type?.trim(),
-      model: data?.model?.trim(),
-      plant: data?.plant,
-      manufacturer: data?.manufacturer?.trim(),
-      year: parseInt(data?.year),
-      serial_number: data?.serial_number?.trim(),
-      brake_test: data?.brake_test,
-      service_frequency: data?.service_frequency,
-      hours: parseInt(data?.hours),
-      mileage: parseInt(data?.mileage),
-      status: data?.status,
-      // file: formData,
-      // file_service_agreement: null,
+    // Add machine fields
+    formData.append('area_id', areaId)
+    formData.append('machine_type', data?.machine_type?.trim())
+    formData.append('model', data?.model?.trim())
+    formData.append('plant', data?.plant)
+    formData.append('manufacturer', data?.manufacturer?.trim())
+    formData.append('year', parseInt(data?.year))
+    formData.append('serial_number', data?.serial_number?.trim())
+    formData.append('brake_test', data?.brake_test)
+    formData.append('service_frequency', data?.service_frequency)
+    formData.append('hours', parseInt(data?.hours))
+    formData.append('mileage', parseInt(data?.mileage))
+    formData.append('status', data?.status)
+
+    // Add file if selected
+    if (selectedFile) {
+      formData.append('file', selectedFile, selectedFile.name)
     }
-    mutate(machine, {
+
+    mutate(formData, {
       onSuccess: () => {
         handleClose()
         reset({
@@ -85,62 +87,18 @@ const AddMachineDialog = ({ isOpen, handleClose, area, areaId }) => {
           mileage: '',
           status: 'active',
         })
+        setSelectedFile(null)
       },
       onError: (error) => {
-        toast.error('Something went wrong while adding task. Please try again!')
+        toast.error(
+          'Something went wrong while adding machine. Please try again!'
+        )
         console.log('Error adding machine:', error)
       },
     })
 
     //after upload file implementation
     // build plain object for machine fields (no file)
-    // const machinePayload = {
-    //   area_id: areaId,
-    //   machine_type: data?.machine_type?.trim(),
-    //   model: data?.model?.trim(),
-    //   plant: data?.plant,
-    //   manufacturer: data?.manufacturer?.trim(),
-    //   year: data?.year ? parseInt(String(data.year), 10) : null,
-    //   serial_number: data?.serial_number?.trim(),
-    //   brake_test: !!data?.brake_test,
-    //   service_frequency: data?.service_frequency,
-    //   hours: data?.hours ? parseInt(String(data.hours), 10) : null,
-    //   mileage: data?.mileage ? parseInt(String(data.mileage), 10) : null,
-    //   status: data?.status,
-    //   file_service_agreement: null,
-    // }
-
-    // // create FormData and append JSON + optional file
-    // const formData = new FormData()
-    // formData.append('machine', JSON.stringify(machinePayload))
-    // if (selectedFile) {
-    //   formData.append('file', selectedFile, selectedFile.name)
-    // }
-
-    // // send FormData to the mutation
-    // mutate(formData, {
-    //   onSuccess: () => {
-    //     handleClose()
-    //     reset({
-    //       machine_type: '',
-    //       model: '',
-    //       plant: 'mobile',
-    //       manufacturer: '',
-    //       year: '',
-    //       serial_number: '',
-    //       brake_test: false,
-    //       service_frequency: '1month',
-    //       hours: '',
-    //       mileage: '',
-    //       status: 'active',
-    //     })
-    //     setSelectedFile(null)
-    //   },
-    //   onError: (error) => {
-    //     toast.error('Something went wrong while adding task. Please try again!')
-    //     console.log('Error adding machine:', error)
-    //   },
-    // })
   }
 
   const handleCancelClick = () => {
@@ -179,7 +137,7 @@ const AddMachineDialog = ({ isOpen, handleClose, area, areaId }) => {
                 Add New Machine to {area}
               </h2>
               <form onSubmit={handleSubmit(handleSaveClick)}>
-                <div className="space-3 grid w-[636px] grid-cols-2 flex-col gap-3 pt-5">
+                <div className="space-3 grid grid-cols-2 flex-col gap-3 pt-5">
                   <Input
                     id="machine_type"
                     label="Machine Type"
@@ -302,6 +260,7 @@ const AddMachineDialog = ({ isOpen, handleClose, area, areaId }) => {
                     disabled={isLoading}
                     {...register('status', { required: true })}
                   />
+
                   <div className="grid items-center gap-3">
                     <InputLabel htmlFor="brake_test">Brake Test</InputLabel>
                     <input
@@ -310,10 +269,18 @@ const AddMachineDialog = ({ isOpen, handleClose, area, areaId }) => {
                       {...register('brake_test', { required: false })}
                     />
                   </div>
-                  {/* <div className="grid items-center gap-3">
-                    <InputLabel htmlFor="uploadFile">File</InputLabel>
-                    <input type="file" onChange={OnFileChange} />
-                  </div> */}
+                  <div className="grid items-center gap-3">
+                    <InputLabel htmlFor="uploadFile">
+                      Service Agreement File
+                    </InputLabel>
+                    <input
+                      id="uploadFile"
+                      type="file"
+                      onChange={handleFileChange}
+                      disabled={isLoading}
+                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                    />
+                  </div>
                 </div>
 
                 <div className="mt-3 grid grid-cols-2 gap-3">

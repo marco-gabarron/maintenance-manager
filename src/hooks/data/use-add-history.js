@@ -8,13 +8,28 @@ export const useAddHistory = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationKey: historyMutationKeys.add(),
-    mutationFn: async (history) => {
-      //Call API and update with new task
+    mutationFn: async (formData) => {
+      const config =
+        formData instanceof FormData
+          ? {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            }
+          : {}
+
       const { data: createdHistory } = await api.post(
         '/api/create/history',
-        history
+        formData,
+        config
       )
       return createdHistory
+      // //Call API and update with new task
+      // const { data: createdHistory } = await api.post(
+      //   '/api/create/history',
+      //   history
+      // )
+      // return createdHistory
     },
 
     onSuccess: (createdHistory) => {

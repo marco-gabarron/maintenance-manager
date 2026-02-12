@@ -4,13 +4,15 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
+import InputLabel from '@/components/InputLabel'
+
 import { ArrowLeftIcon, ChevronRightIcon } from '../assets/icons'
 import Button from '../components/Button'
-// import Button from '../components/Button'
 import Input from '../components/Input'
 import ServiceSelect from '../components/ServiceSelect'
 import Sidebar from '../components/Sidebar'
 import TypeSelect from '../components/TypeSelect'
+import { useGetFile } from '../hooks/data/use-get-file'
 import { useGetHistory } from '../hooks/data/use-get-history'
 // import { useGetMachine } from '../hooks/data/use-get-machine'
 import { useUpdateHistory } from '../hooks/data/use-update-history'
@@ -28,6 +30,10 @@ const HistoryDetailsPage = () => {
 
   const { mutate: updateHistory } = useUpdateHistory(historyId)
   const { data: history } = useGetHistory(historyId, reset)
+  const { data: file } = useGetFile(
+    history?.file_service_report,
+    'service-report'
+  )
 
   // const { data: machine } = useGetMachine(history?.machine_id, reset)
 
@@ -65,6 +71,27 @@ const HistoryDetailsPage = () => {
       onError: () =>
         toast.error('Something went wrong while updating, Please try again!'),
     })
+  }
+
+  const handleOpenServiceAgreement = (e) => {
+    e.preventDefault()
+    if (file) {
+      // Create a blob URL and open in new tab
+      const blobUrl = URL.createObjectURL(file)
+      window.open(blobUrl, '_blank')
+
+      // Optional: cleanup the URL after a delay
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 100)
+    } else {
+      toast.error('No Service Report file uploaded for this service.')
+    }
+
+    // if (history?.file_service_report) {
+    //   const fileUrl = `http://localhost:8080/api/downloads/${history.file_service_report}?originalSource=service-report`
+    //   window.open(fileUrl, '_blank')
+    // } else {
+    //   toast.error('No Service Report file uploaded for this service.')
+    // }
   }
 
   return (
@@ -205,6 +232,20 @@ const HistoryDetailsPage = () => {
                 },
               })}
             />
+
+            <div className="flex flex-col gap-2">
+              <InputLabel htmlFor="service_report">Service Report</InputLabel>
+              <button
+                onClick={handleOpenServiceAgreement}
+                // href="http://localhost:8080/api/downloads"
+                // target="_blank"
+                // rel="noreferrer"
+              >
+                {history?.file_service_report
+                  ? history.file_service_report
+                  : 'No File Uploaded'}
+              </button>
+            </div>
           </div>
 
           <div className="mt-2 flex w-full justify-end">
