@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
+
+import { AuthContext } from '@/contexts/AuthContext'
 
 import { AddIcon, ArrowLeftIcon, ChevronRightIcon } from '../assets/icons'
 import AddHistoryDialog from '../components/AddHistoryDialog'
@@ -21,6 +23,7 @@ import { useGetMachine } from '../hooks/data/use-get-machine'
 import { useUpdateMachine } from '../hooks/data/use-update-machine'
 
 const MachineDetailsPage = () => {
+  const { isInitializing, user } = useContext(AuthContext)
   const { machineId } = useParams()
   let search = window.location.search
   let params = new URLSearchParams(search)
@@ -74,6 +77,11 @@ const MachineDetailsPage = () => {
     } else {
       toast.error('No Service Agreement file uploaded for this machine.')
     }
+  }
+
+  if (isInitializing) return null // or a loading spinner
+  if (!user) {
+    return <Navigate to="/" /> // or a message saying that the user is not authenticated, but in this case we will just show the login form, so we can return null here
   }
 
   return (

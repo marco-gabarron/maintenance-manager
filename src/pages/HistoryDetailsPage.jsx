@@ -1,10 +1,11 @@
 import { format, parseISO } from 'date-fns'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
 import InputLabel from '@/components/InputLabel'
+import { AuthContext } from '@/contexts/AuthContext'
 
 import { ArrowLeftIcon, ChevronRightIcon } from '../assets/icons'
 import Button from '../components/Button'
@@ -18,6 +19,8 @@ import { useGetHistory } from '../hooks/data/use-get-history'
 import { useUpdateHistory } from '../hooks/data/use-update-history'
 
 const HistoryDetailsPage = () => {
+  const { isInitializing, user } = useContext(AuthContext)
+
   const { historyId } = useParams()
   const navigate = useNavigate()
 
@@ -92,6 +95,11 @@ const HistoryDetailsPage = () => {
     // } else {
     //   toast.error('No Service Report file uploaded for this service.')
     // }
+  }
+
+  if (isInitializing) return null // or a loading spinner
+  if (!user) {
+    return <Navigate to="/" /> // or a message saying that the user is not authenticated, but in this case we will just show the login form, so we can return null here
   }
 
   return (

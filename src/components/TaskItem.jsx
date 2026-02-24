@@ -12,8 +12,6 @@ const TaskItem = ({ task }) => {
 
   const { mutate: updateTask } = useUpdateTask(task.id)
 
-  console.log(task)
-
   const handleDeleteClick = async () => {
     mutate(undefined, {
       onSuccess: () => {

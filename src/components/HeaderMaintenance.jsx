@@ -1,5 +1,6 @@
+import Button from './Button'
 
-function HeaderMaintenance({ subtitle, title }) {
+function HeaderMaintenance({ subtitle, title, logout }) {
   return (
     <div className="flex w-full justify-between">
       <div>
@@ -7,6 +8,11 @@ function HeaderMaintenance({ subtitle, title }) {
           {subtitle}
         </span>
         <h2 className="text-xs font-semibold">{title}</h2>
+      </div>
+      <div>
+        <Button color="danger" onClick={logout}>
+          Log Out
+        </Button>
       </div>
     </div>
   )

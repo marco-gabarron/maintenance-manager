@@ -1,6 +1,8 @@
 // import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+
+import { AuthContext } from '@/contexts/AuthContext'
 
 import { ArrowLeftIcon, ChevronRightIcon } from '../assets/icons'
 import { AddIcon } from '../assets/icons'
@@ -11,6 +13,7 @@ import Sidebar from '../components/Sidebar'
 import { useGetArea, useGetMachines } from '../hooks/data/use-get-machines'
 
 const Maintenance2Page = () => {
+  const { isInitializing, user } = useContext(AuthContext)
   const { areaId } = useParams()
   const { data: area } = useGetArea(areaId)
   const { data: machines } = useGetMachines(areaId)
@@ -23,6 +26,11 @@ const Maintenance2Page = () => {
 
   const handleBackClick = () => {
     navigate(-1)
+  }
+
+  if (isInitializing) return null // or a loading spinner
+  if (!user) {
+    return <Navigate to="/" /> // or a message saying that the user is not authenticated, but in this case we will just show the login form, so we can return null here
   }
 
   return (

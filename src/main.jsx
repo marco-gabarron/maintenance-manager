@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
+import { AuthContextProvider } from './contexts/auth'
 import HistoryDetailsPage from './pages/HistoryDetailsPage.jsx'
 import HomePage from './pages/home'
 import MachineDetailsPage from './pages/MachineDetailsPage.jsx'
@@ -45,14 +46,16 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Toaster
-        toastOptions={{
-          style: {
-            color: '#00ADB5',
-          },
-        }}
-      />
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <Toaster
+          toastOptions={{
+            style: {
+              color: '#00ADB5',
+            },
+          }}
+        />
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </QueryClientProvider>
   </React.StrictMode>
 )
